@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputPath>../bin</OutputPath>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="SDL2.NET" Version="1.2.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ContentWithTargetPath Include="Dependencies\Windows\SDL2.dll">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <TargetPath>SDL2.dll</TargetPath>
+        </ContentWithTargetPath>
+        <None Include="Dependencies\Windows\SDL2.dll" />
+        <ContentWithTargetPath Include="Dependencies\Windows\SDL2_ttf.dll">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <TargetPath>SDL2_ttf.dll</TargetPath>
+        </ContentWithTargetPath>
+        <None Include="Dependencies\Windows\SDL2_ttf.dll" />
+        <ContentWithTargetPath Include="Dependencies\Font\Sans.ttf">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <TargetPath>Sans.ttf</TargetPath>
+        </ContentWithTargetPath>
+        <None Include="Dependencies\Font\Sans.ttf" />
+    </ItemGroup>
+
+</Project>

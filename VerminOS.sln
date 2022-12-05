@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerminOS", "VerminOS\VerminOS.csproj", "{9A92B7BC-85D3-43E0-84FA-B86BBB4E2F78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicoDotNet.SDL", "PicoDotNet.SDL\PicoDotNet.SDL.csproj", "{014D39B4-F8A3-49F4-AF7E-29201FC5FA7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicoDotNet.BareMetal", "PicoDotNet.BareMetal\PicoDotNet.BareMetal.csproj", "{1C29FD2C-2D68-42C3-8ADA-7D2E9861B51E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicoDotNet.Runtime.Cosmos", "PicoDotNet.Runtime.Cosmos\PicoDotNet.Runtime.Cosmos.csproj", "{A21909AE-D615-41F7-803E-FA33E95ED701}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A92B7BC-85D3-43E0-84FA-B86BBB4E2F78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A92B7BC-85D3-43E0-84FA-B86BBB4E2F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A92B7BC-85D3-43E0-84FA-B86BBB4E2F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A92B7BC-85D3-43E0-84FA-B86BBB4E2F78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{014D39B4-F8A3-49F4-AF7E-29201FC5FA7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{014D39B4-F8A3-49F4-AF7E-29201FC5FA7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{014D39B4-F8A3-49F4-AF7E-29201FC5FA7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{014D39B4-F8A3-49F4-AF7E-29201FC5FA7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C29FD2C-2D68-42C3-8ADA-7D2E9861B51E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C29FD2C-2D68-42C3-8ADA-7D2E9861B51E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C29FD2C-2D68-42C3-8ADA-7D2E9861B51E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C29FD2C-2D68-42C3-8ADA-7D2E9861B51E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A21909AE-D615-41F7-803E-FA33E95ED701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A21909AE-D615-41F7-803E-FA33E95ED701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A21909AE-D615-41F7-803E-FA33E95ED701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A21909AE-D615-41F7-803E-FA33E95ED701}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

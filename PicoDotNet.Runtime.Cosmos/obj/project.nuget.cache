@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "rAD8ntjNOHe3f5YwZainAZCqCQpvxdOPYLk+xJ1G3SKplICNpczQhd1CT42v/7zqQXghIZBhtCDdnBax1EN6NA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\AnErrupTion\\Desktop\\VerminOS\\PicoDotNet.Runtime.Cosmos\\PicoDotNet.Runtime.Cosmos.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\AnErrupTion\\.nuget\\packages\\cosmos.build\\0.1.0-localbuild20221203011858\\cosmos.build.0.1.0-localbuild20221203011858.nupkg.sha512",
+    "C:\\Users\\AnErrupTion\\.nuget\\packages\\cosmos.common\\0.1.0-localbuild20221203011902\\cosmos.common.0.1.0-localbuild20221203011902.nupkg.sha512",
+    "C:\\Users\\AnErrupTion\\.nuget\\packages\\cosmos.core\\0.1.0-localbuild20221203011902\\cosmos.core.0.1.0-localbuild20221203011902.nupkg.sha512",
+    "C:\\Users\\AnErrupTion\\.nuget\\packages\\cosmos.debug.kernel\\0.1.0-localbuild20221203011902\\cosmos.debug.kernel.0.1.0-localbuild20221203011902.nupkg.sha512",
+    "C:\\Users\\AnErrupTion\\.nuget\\packages\\cosmos.hal2\\0.1.0-localbuild20221203011902\\cosmos.hal2.0.1.0-localbuild20221203011902.nupkg.sha512",
+    "C:\\Users\\AnErrupTion\\.nuget\\packages\\cosmos.system2\\0.1.0-localbuild20221203011902\\cosmos.system2.0.1.0-localbuild20221203011902.nupkg.sha512",
+    "C:\\Users\\AnErrupTion\\.nuget\\packages\\il2cpu.api\\0.1.0-localbuild20221203011902\\il2cpu.api.0.1.0-localbuild20221203011902.nupkg.sha512"
+  ],
+  "logs": []
+}

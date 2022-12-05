@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <UseAppHost>false</UseAppHost>
+        <OutputPath>../bin</OutputPath>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+        <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+        <DisableStandardFrameworkResolution>true</DisableStandardFrameworkResolution>
+        <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    </PropertyGroup>
+
+    <Target Name="CopyFiles" AfterTargets="Build">
+        <Copy SourceFiles="$(OutDir)\VerminOS.dll;$(OutDir)\PicoDotNet.BareMetal.dll;$(OutDir)\Corelib.dll" DestinationFolder="$(OutDir)\..\PicoDotNet.Runtime.Cosmos\isoFiles" />
+        <MSBuild Projects="$(OutDir)\..\PicoDotNet.Runtime.Cosmos\PicoDotNet.Runtime.Cosmos.csproj" Targets="Build" />
+    </Target>
+
+    <ItemGroup>
+        <Reference Include="Corelib">
+            <HintPath>..\Dependencies\Corelib.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\PicoDotNet.BareMetal\PicoDotNet.BareMetal.csproj" />
+    </ItemGroup>
+    
+</Project>
