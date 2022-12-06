@@ -11,10 +11,12 @@
         <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
     </PropertyGroup>
 
+<!--
     <Target Name="CopyFiles" AfterTargets="Build">
         <Copy SourceFiles="$(OutDir)\VerminOS.dll;$(OutDir)\PicoDotNet.BareMetal.dll;$(OutDir)\Corelib.dll" DestinationFolder="$(OutDir)\..\PicoDotNet.Runtime.Cosmos\isoFiles" />
         <MSBuild Projects="$(OutDir)\..\PicoDotNet.Runtime.Cosmos\PicoDotNet.Runtime.Cosmos.csproj" Targets="Build" />
     </Target>
+-->
 
     <ItemGroup>
         <Reference Include="Corelib">
