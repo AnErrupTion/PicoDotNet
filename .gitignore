@@ -54,7 +54,7 @@ nunit-*.xml
 dlldata.c
 
 # Configuration file for builder
-Build/builer_config.ini
+Build/builder_config.ini
 
 # Cross compiler
 Build/i686-elf-tools-windows/
