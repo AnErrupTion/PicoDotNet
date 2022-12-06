@@ -20,7 +20,7 @@ public static class Program
         if (Directory.Exists("Bin")) { Directory.Delete("Bin", true); }
         Directory.CreateDirectory("Bin/Obj");
 
-        Process.Start(BuildPaths.Nasm, "-felf32 Source/Start.asm -o Bin/Start.o").WaitForExit();
+        Process.Start(BuildPaths.Nasm, "-felf32 Source/Boot/Start.asm -o Bin/Start.o").WaitForExit();
 
         foreach (var file in Directory.GetFiles("Source", "*.c", SearchOption.AllDirectories))
             Process.Start(BuildPaths.Gcc,

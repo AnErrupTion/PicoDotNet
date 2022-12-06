@@ -356,3 +356,5 @@ MigrationBackup/
 .ionide/
 
 PicoDotNet.Runtime.C/Build/builder_config.ini
+PicoDotNet.Interpreter/TestApp/net7.0
+PicoDotNet.Interpreter/TestApp/obj
