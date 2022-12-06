@@ -46,7 +46,7 @@ int main()
     printf("PicoDotNet Interpreter\n");
 
     // load binary file data into an array
-    uint8_t* data = ReadBytes("TestApp/net7.0/TestApp.dll");
+    uint8_t* data = ReadBytes("../TestApp/net7.0/TestApp.dll");
 
     // validate the dos header
     IMAGE_DOS_HEADER* dos_hdr = (IMAGE_DOS_HEADER*)data;
