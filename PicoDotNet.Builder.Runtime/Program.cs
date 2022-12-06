@@ -37,7 +37,7 @@ public static class Program
             Gcc = "i686-elf-gcc";
             Ld = "i686-elf-ld";
             Objdump = "i686-elf-objdump";
-            LimineDeploy = "Build/limine-deploy";
+            LimineDeploy = "limine-deploy";
             Qemu = "qemu-system-i386";
         }
 
