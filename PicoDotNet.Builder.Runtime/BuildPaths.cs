@@ -8,7 +8,7 @@ namespace PicoDotNet.Builder.Runtime;
 
 public static class BuildPaths
 {
-    public const string ConfigFile = "Build/builer_config.ini";
+    public const string ConfigFile = "Build/builder_config.ini";
 
     public static string Nasm           { get; private set; } = "";
     public static string Gcc            { get; private set; } = "";

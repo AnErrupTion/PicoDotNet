@@ -12,6 +12,7 @@ public static class Program
 
     public static void Main(string[] _)
     {
+        Console.WriteLine("Detected platform - " + RuntimeInformation.OSDescription);
         Directory.SetCurrentDirectory("../PicoDotNet.Runtime.C");
 
         BuildPaths.LoadConfiguration();
