@@ -53,6 +53,9 @@ nunit-*.xml
 [Rr]eleasePS/
 dlldata.c
 
+# Cross compiler
+Build/i686-elf-tools-windows/
+
 # Benchmark Results
 BenchmarkDotNet.Artifacts/
 
