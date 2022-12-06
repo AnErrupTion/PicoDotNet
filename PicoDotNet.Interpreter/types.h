@@ -1,10 +1,10 @@
 
-typedef uint8_t byte;
+typedef uint8_t  byte;
 typedef uint16_t ushort;
 typedef uint32_t uint;
 typedef uint64_t ulong;
 
-typedef uint8_t BYTE;
+typedef uint8_t  BYTE;
 typedef uint16_t WORD;
 typedef uint32_t DWORD;
 typedef uint64_t QWORD;
@@ -121,3 +121,12 @@ typedef struct _IMAGE_CLR_HEADER {
     DWORD ManagedNativeHeaderAddress;
     DWORD ManagedNativeHeaderSize;
 } IMAGE_CLR_HEADER, *PIMAGE_CLR_HEADER;
+
+#define IMAGE_DOS_HDR_OFFSET  (0)
+#define IMAGE_DOS_HDR_SZ      (64)
+#define IMAGE_DOS_STUB_OFFSET (IMAGE_DOS_HDR_OFFSET + IMAGE_DOS_HDR_SZ)
+#define IMAGE_DOS_STUB_SZ     (64)
+#define IMAGE_PE_HDR_OFFSET   (IMAGE_DOS_STUB_OFFSET + IMAGE_DOS_STUB_SZ)
+#define IMAGE_PE_HDR_SZ       (sizeof(IMAGE_FILE_HEADER))
+#define IMAGE_OPT_HDR_OFFSET  (IMAGE_PE_HDR_OFFSET + IMAGE_PE_HDR_SZ)
+#define IMAGE_OPT_HDR_SZ      (sizeof(IMAGE_OPTIONAL_HEADER32));

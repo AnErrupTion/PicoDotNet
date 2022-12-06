@@ -7,10 +7,14 @@
 #include <ctype.h>
 #include <locale.h>
 #include "types.h"
+#include "binary_reader.h"
 
-byte* ReadBytes(const char* name) {
-    FILE* file = fopen(name, "r");
-    if (file == NULL) { printf("Failed to located file at '%s'\n", name); exit(1); return NULL; }
+ushort                number_of_sections;
+IMAGE_HEADER_SECTION* sections;
+
+byte* ReadBytes(const char* fname) {
+    FILE* file = fopen(fname, "r");
+    if (file == NULL) { printf("Failed to located file at '%s'\n", fname); exit(1); return NULL; }
 
     fseek(file, 0, SEEK_END);
     size_t size = ftell(file);
@@ -23,37 +27,77 @@ byte* ReadBytes(const char* name) {
     return dstBuf;
 }
 
-byte* buffer;
 
-byte* GetBuffer(uint offset, uint size) {
-    byte* buf = malloc(size);
+ulong RvaToOffset(ulong rva) 
+{
+    if (rva == 0) { printf("RVA cannot be 0!\n"); exit(1); }
 
-    for (uint i = 0; i < size; i++)
-        buf[i] = buffer[offset + i];
-
-    return buf;
-}
-
-ushort number_of_sections;
-IMAGE_HEADER_SECTION* sections;
-
-ulong RvaToOffset(ulong rva) {
-    if (rva == 0) {
-        printf("RVA cannot be 0!\n");
-        exit(1);
-    }
-
-    for (ushort i = 0; i < number_of_sections; i++) {
+    for (ushort i = 0; i < number_of_sections; i++) 
+    {
         IMAGE_HEADER_SECTION section = sections[i];
         if (section.VirtualAddress <= rva && section.VirtualAddress + section.SizeOfRawData >= rva)
-            return section.PointerToRawData + (rva - section.VirtualAddress);
+            { return section.PointerToRawData + (rva - section.VirtualAddress); }
     }
 
     printf("Cannot find the section.\n");
     exit(1);
 }
 
-int main() {
+int main()
+{
+    printf("PicoDotNet Interpreter\n");
+
+    // load binary file data into an array
+    uint8_t* data = ReadBytes("TestApp/net7.0/TestApp.dll");
+
+    // validate the dos header
+    IMAGE_DOS_HEADER* dos_hdr = (IMAGE_DOS_HEADER*)data;
+    if (dos_hdr->e_magic != 0x5A4D) { printf("Invalid DOS header magic number - %04X\n", dos_hdr->e_magic); exit(1); }
+    printf("Valid DOS magic number detected.\n");
+
+    // validate the PE file header
+    IMAGE_FILE_HEADER* pe_file_hdr = (IMAGE_FILE_HEADER*)((uintptr_t)data + IMAGE_PE_HDR_OFFSET);
+    if (pe_file_hdr->Signature != 0x4550) { printf("Invalid PE file header signature! - %08X\n", pe_file_hdr->Signature); exit(1); }
+    printf("Valid PE file header signature detected.\n");
+
+    // validate the optional PE file header
+    IMAGE_OPTIONAL_HEADER32* pe_opt_hdr = (IMAGE_OPTIONAL_HEADER32*)((uintptr_t)data + IMAGE_OPT_HDR_OFFSET);
+    if (pe_opt_hdr->Magic != 0x10B) { printf("Invalid PE optional header magic number! - %08X\n", pe_opt_hdr->Magic); exit(1); }
+
+    for (int i = 0; i < 16; i++) 
+    {
+        IMAGE_DATA_DIRECTORY directory = pe_opt_hdr->DataDirectory[i];
+        printf("%d: virt %d sz %d\n", i, directory.VirtualAddress, directory.Size);
+    }
+
+    number_of_sections = pe_file_hdr->NumberOfSections;
+    sections           = pe_opt_hdr->Sections;
+
+    for (ushort i = 0; i < number_of_sections; i++) 
+    {
+        IMAGE_HEADER_SECTION section = sections[i];
+        for (int j = 0; j < 8; j++) { printf("%c", section.Name[j]); }
+        printf("\n");
+    }
+
+    IMAGE_DATA_DIRECTORY clr_dir_hdr = pe_opt_hdr->DataDirectory[14];
+    IMAGE_CLR_HEADER*    clr_hdr     = (IMAGE_CLR_HEADER*)((uintptr_t)data + RvaToOffset(clr_dir_hdr.VirtualAddress));
+
+    printf("sz %d addr %d maj %d min %d\n", clr_hdr->HeaderSize, clr_hdr->StrongNameSignatureAddress, clr_hdr->MajorRuntimeVersion, clr_hdr->MinorRuntimeVersion);
+
+    uint32_t strong_name_sig = RvaToOffset(clr_hdr->StrongNameSignatureAddress);
+    printf("%d\n", strong_name_sig);
+
+    // free allocated memory
+    free(data);
+
+    // finished
+    printf("Interpreter has finished.\n");
+    return 0;
+}
+
+/*
+int main2() {
     buffer = ReadBytes("TestApp/net7.0/TestApp.dll");
     uint offset = 0;
 
@@ -122,3 +166,4 @@ int main() {
     printf("Interpreted finished\n");
     return 0;
 }
+*/

@@ -36,7 +36,7 @@ static inline void DisposeBinaryReader(BinaryReader* reader)
     if (reader->data != NULL) { free(reader->data); }
 }
 
-uint8_t static inline BR_Read8(BinaryReader* reader)
+static inline uint8_t BR_Read8(BinaryReader* reader)
 {
     if (reader == NULL) { return 0; }
     uint8_t v = reader->data[reader->pos];
@@ -44,7 +44,7 @@ uint8_t static inline BR_Read8(BinaryReader* reader)
     return v;
 }
 
-uint16_t static inline BR_Read16(BinaryReader* reader)
+static inline uint16_t BR_Read16(BinaryReader* reader)
 {
     if (reader == NULL) { return 0; }
     uint16_t v = *(uint16_t*)((uintptr_t)reader->data + (uintptr_t)reader->pos);
@@ -52,7 +52,7 @@ uint16_t static inline BR_Read16(BinaryReader* reader)
     return v;
 }
 
-uint32_t static inline BR_Read32(BinaryReader* reader)
+static inline uint32_t BR_Read32(BinaryReader* reader)
 {
     if (reader == NULL) { return 0; }
     uint32_t v = *(uint32_t*)((uintptr_t)reader->data + (uintptr_t)reader->pos);
@@ -60,7 +60,7 @@ uint32_t static inline BR_Read32(BinaryReader* reader)
     return v;
 }
 
-uint64_t static inline BR_Read64(BinaryReader* reader)
+static inline uint64_t BR_Read64(BinaryReader* reader)
 {
     if (reader == NULL) { return 0; }
     uint64_t v = *(uint64_t*)((uintptr_t)reader->data + (uintptr_t)reader->pos);
