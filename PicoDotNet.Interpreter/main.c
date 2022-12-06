@@ -2,10 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stddef.h>
-#include <stdarg.h>
-#include <string.h>
 #include <ctype.h>
-#include <locale.h>
 #include "types.h"
 #include "binary_reader.h"
 
@@ -32,8 +29,28 @@ ulong RvaToOffset(ulong rva)
 {
     if (rva == 0) { printf("RVA cannot be 0!\n"); exit(1); }
 
+<<<<<<< HEAD
     for (ushort i = 0; i < number_of_sections; i++) 
     {
+=======
+    for (uint i = 0; i < size; i++)
+        buf[i] = buffer[offset + i];
+
+    return buf;
+}
+
+ushort number_of_sections;
+IMAGE_HEADER_SECTION* sections;
+
+ulong RvaToOffset(ulong rva) {
+    if (rva == 0) {
+        printf("RVA cannot be 0!\n");
+        exit(1);
+        return 0;
+    }
+
+    for (ushort i = 0; i < number_of_sections; i++) {
+>>>>>>> 31030cf2fca82e818c6151e420915ad6b0531fab
         IMAGE_HEADER_SECTION section = sections[i];
         if (section.VirtualAddress <= rva && section.VirtualAddress + section.SizeOfRawData >= rva)
             { return section.PointerToRawData + (rva - section.VirtualAddress); }
@@ -41,8 +58,10 @@ ulong RvaToOffset(ulong rva)
 
     printf("Cannot find the section.\n");
     exit(1);
+    return 0;
 }
 
+<<<<<<< HEAD
 int main()
 {
     printf("PicoDotNet Interpreter\n");
@@ -99,6 +118,10 @@ int main()
 /*
 int main2() {
     buffer = ReadBytes("TestApp/net7.0/TestApp.dll");
+=======
+int main() {
+    buffer = ReadBytes("../TestApp/net7.0/TestApp.dll");
+>>>>>>> 31030cf2fca82e818c6151e420915ad6b0531fab
     uint offset = 0;
 
     IMAGE_DOS_HEADER* dos_header = (IMAGE_DOS_HEADER*) GetBuffer(offset, sizeof(IMAGE_DOS_HEADER));

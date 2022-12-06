@@ -31,6 +31,14 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+# CMake build
+build/
+PicoDotNet.Interpreter/CMakeFiles/
+PicoDotNet.Interpreter/PicoDotNet.Interpreter
+PicoDotNet.Interpreter/cmake_install.cmake
+PicoDotNet.Interpreter/CMakeCache.txt
+PicoDotNet.Interpreter/Makefile
+
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
@@ -54,7 +62,7 @@ nunit-*.xml
 dlldata.c
 
 # Configuration file for builder
-Build/builer_config.ini
+Build/builder_config.ini
 
 # Cross compiler
 Build/i686-elf-tools-windows/
