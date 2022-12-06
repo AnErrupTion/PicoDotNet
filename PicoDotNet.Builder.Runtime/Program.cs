@@ -8,7 +8,7 @@ namespace PicoDotNet.Builder.Runtime;
 public static class Program
 {
     private const string KernelArgs =
-        "-nostdlib -ffreestanding -Wall -Wextra -fno-exceptions -Wno-write-strings -Wno-unused-parameter -Wno-unused-variable";
+        "-IInclude -nostdlib -ffreestanding -Wall -Wextra -fno-exceptions -Wno-write-strings -Wno-unused-parameter -Wno-unused-variable";
 
     public static void Main(string[] _)
     {
@@ -24,7 +24,7 @@ public static class Program
 
         foreach (var file in Directory.GetFiles("Source", "*.c", SearchOption.AllDirectories))
             Process.Start(BuildPaths.Gcc,
-                    $"-Iinclude -I../libk/include -c \"{file}\" -o \"Bin/Obj/{Path.GetFileNameWithoutExtension(file) + ".o"}\" {KernelArgs}")
+                    $"-c \"{file}\" -o \"Bin/Obj/{Path.GetFileNameWithoutExtension(file) + ".o"}\" {KernelArgs}")
                 .WaitForExit();
 
         Process.Start(BuildPaths.Ld,
