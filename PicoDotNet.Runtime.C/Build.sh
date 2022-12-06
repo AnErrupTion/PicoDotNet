@@ -1,5 +1,0 @@
-cd "PicoDotNet.Runtime.C"
-sh "Build/Scripts/BuildKernel.sh"
-sh "Build/Scripts/BuildISO.sh"
-sh "Build/Scripts/RunQEMU.sh"
-cd "../"

@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "qZVJ/EEbyktMHSSw8kyKcO+SuC9D19SgOutfsZkznMgAWAlfVgeQ+vb02EjWUOtbU/xQIUFvHlfYTuLHgY0o5Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\AnErrupTion\\Desktop\\VerminOS\\PicoDotNet.SDL\\PicoDotNet.SDL.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\AnErrupTion\\.nuget\\packages\\sdl2.bindings\\1.0.0\\sdl2.bindings.1.0.0.nupkg.sha512",
+    "C:\\Users\\AnErrupTion\\.nuget\\packages\\sdl2.net\\1.2.3\\sdl2.net.1.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
