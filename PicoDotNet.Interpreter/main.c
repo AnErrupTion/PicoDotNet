@@ -29,28 +29,8 @@ ulong RvaToOffset(ulong rva)
 {
     if (rva == 0) { printf("RVA cannot be 0!\n"); exit(1); }
 
-<<<<<<< HEAD
-    for (ushort i = 0; i < number_of_sections; i++) 
+    for (ushort i = 0; i < number_of_sections; i++)
     {
-=======
-    for (uint i = 0; i < size; i++)
-        buf[i] = buffer[offset + i];
-
-    return buf;
-}
-
-ushort number_of_sections;
-IMAGE_HEADER_SECTION* sections;
-
-ulong RvaToOffset(ulong rva) {
-    if (rva == 0) {
-        printf("RVA cannot be 0!\n");
-        exit(1);
-        return 0;
-    }
-
-    for (ushort i = 0; i < number_of_sections; i++) {
->>>>>>> 31030cf2fca82e818c6151e420915ad6b0531fab
         IMAGE_HEADER_SECTION section = sections[i];
         if (section.VirtualAddress <= rva && section.VirtualAddress + section.SizeOfRawData >= rva)
             { return section.PointerToRawData + (rva - section.VirtualAddress); }
@@ -61,7 +41,6 @@ ulong RvaToOffset(ulong rva) {
     return 0;
 }
 
-<<<<<<< HEAD
 int main()
 {
     printf("PicoDotNet Interpreter\n");
@@ -83,7 +62,7 @@ int main()
     IMAGE_OPTIONAL_HEADER32* pe_opt_hdr = (IMAGE_OPTIONAL_HEADER32*)((uintptr_t)data + IMAGE_OPT_HDR_OFFSET);
     if (pe_opt_hdr->Magic != 0x10B) { printf("Invalid PE optional header magic number! - %08X\n", pe_opt_hdr->Magic); exit(1); }
 
-    for (int i = 0; i < 16; i++) 
+    for (int i = 0; i < 16; i++)
     {
         IMAGE_DATA_DIRECTORY directory = pe_opt_hdr->DataDirectory[i];
         printf("%d: virt %d sz %d\n", i, directory.VirtualAddress, directory.Size);
@@ -92,7 +71,7 @@ int main()
     number_of_sections = pe_file_hdr->NumberOfSections;
     sections           = pe_opt_hdr->Sections;
 
-    for (ushort i = 0; i < number_of_sections; i++) 
+    for (ushort i = 0; i < number_of_sections; i++)
     {
         IMAGE_HEADER_SECTION section = sections[i];
         for (int j = 0; j < 8; j++) { printf("%c", section.Name[j]); }
@@ -121,7 +100,6 @@ int main2() {
 =======
 int main() {
     buffer = ReadBytes("../TestApp/net7.0/TestApp.dll");
->>>>>>> 31030cf2fca82e818c6151e420915ad6b0531fab
     uint offset = 0;
 
     IMAGE_DOS_HEADER* dos_header = (IMAGE_DOS_HEADER*) GetBuffer(offset, sizeof(IMAGE_DOS_HEADER));
