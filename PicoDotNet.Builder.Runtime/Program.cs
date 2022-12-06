@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.IO;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using DiscUtils.Iso9660;
@@ -14,6 +15,7 @@ public static class Program
 
     public static void Main(string[] _)
     {
+        Console.WriteLine(Environment.CurrentDirectory);
         Directory.SetCurrentDirectory("../PicoDotNet.Runtime.C");
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -35,8 +37,7 @@ public static class Program
             Gcc = "i686-elf-gcc";
             Ld = "i686-elf-ld";
             Objdump = "i686-elf-objdump";
-            Nasm = "xorriso";
-            LimineDeploy = "limine-deploy";
+            LimineDeploy = "Build/limine-deploy";
             Qemu = "qemu-system-i386";
         }
 
