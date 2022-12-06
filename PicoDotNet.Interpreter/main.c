@@ -2,10 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stddef.h>
-#include <stdarg.h>
-#include <string.h>
 #include <ctype.h>
-#include <locale.h>
 #include "types.h"
 
 byte* ReadBytes(const char* name) {
@@ -41,6 +38,7 @@ ulong RvaToOffset(ulong rva) {
     if (rva == 0) {
         printf("RVA cannot be 0!\n");
         exit(1);
+        return 0;
     }
 
     for (ushort i = 0; i < number_of_sections; i++) {
@@ -51,6 +49,7 @@ ulong RvaToOffset(ulong rva) {
 
     printf("Cannot find the section.\n");
     exit(1);
+    return 0;
 }
 
 int main() {
