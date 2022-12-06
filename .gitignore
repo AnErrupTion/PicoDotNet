@@ -37,6 +37,7 @@ PicoDotNet.Interpreter/CMakeFiles/
 PicoDotNet.Interpreter/PicoDotNet.Interpreter
 PicoDotNet.Interpreter/cmake_install.cmake
 PicoDotNet.Interpreter/CMakeCache.txt
+PicoDotNet.Interpreter/Makefile
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
