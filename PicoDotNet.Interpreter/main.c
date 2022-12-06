@@ -53,7 +53,7 @@ ulong RvaToOffset(ulong rva) {
 }
 
 int main() {
-    buffer = ReadBytes("TestApp/net7.0/TestApp.dll");
+    buffer = ReadBytes("../TestApp/net7.0/TestApp.dll");
     uint offset = 0;
 
     IMAGE_DOS_HEADER* dos_header = (IMAGE_DOS_HEADER*) GetBuffer(offset, sizeof(IMAGE_DOS_HEADER));
