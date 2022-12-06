@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using DiscUtils.Iso9660;
