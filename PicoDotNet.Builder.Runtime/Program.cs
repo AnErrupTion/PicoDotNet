@@ -25,6 +25,9 @@ public static class Program
             LimineDeploy = Path.Combine("Build", "limine-deploy.exe");
             Qemu = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "qemu",
                 "qemu-system-i386");
+
+            if (!File.Exists(Gcc))
+                Console.WriteLine("Please download i686-elf-tools-windows and put in inside the Build directory of the builder!\nYou can download it here: https://github.com/alessandromrc/i686-elf-tools/releases");
         }
         else
         {
