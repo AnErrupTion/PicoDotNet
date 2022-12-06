@@ -1,3 +1,0 @@
-/home/will/Documents/Projects/PicoDotNet/PicoDotNet.Interpreter/CMakeFiles/PicoDotNet_Interpreter.dir
-/home/will/Documents/Projects/PicoDotNet/PicoDotNet.Interpreter/CMakeFiles/edit_cache.dir
-/home/will/Documents/Projects/PicoDotNet/PicoDotNet.Interpreter/CMakeFiles/rebuild_cache.dir

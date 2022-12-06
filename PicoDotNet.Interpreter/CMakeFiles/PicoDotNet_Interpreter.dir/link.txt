@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/PicoDotNet_Interpreter.dir/main.c.o -o PicoDotNet_Interpreter 
