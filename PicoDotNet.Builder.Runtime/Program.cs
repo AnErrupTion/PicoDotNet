@@ -21,6 +21,10 @@ public static class Program
         Directory.CreateDirectory("Bin/Obj");
 
         Process.Start(BuildPaths.Nasm, "-felf32 Source/Boot/Start.asm -o Bin/Start.o").WaitForExit();
+        Process.Start(BuildPaths.Nasm, "-felf32 Source/HAL/System/RealMode.asm -o Bin/Obj/RealMode.o").WaitForExit();
+        Process.Start(BuildPaths.Nasm, "-felf32 Source/HAL/Interrupts/IRQs.asm -o Bin/Obj/IRQs.o").WaitForExit();
+        Process.Start(BuildPaths.Nasm, "-felf32 Source/Core/Multitasking/ThreadSwitch.asm -o Bin/Obj/ThreadSwitch.o").WaitForExit();
+        Process.Start(BuildPaths.Nasm, "-felf32 Source/HAL/System/Registers.asm -o Bin/Obj/Registers.o").WaitForExit();
 
         foreach (var file in Directory.GetFiles("Source", "*.c", SearchOption.AllDirectories))
             Process.Start(BuildPaths.Gcc,

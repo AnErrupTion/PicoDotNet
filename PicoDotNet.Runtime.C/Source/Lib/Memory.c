@@ -74,10 +74,25 @@ const void* PICO_MemLocate(const void* ptr, int v, size_t sz)
 
 void* PICO_Alloc(size_t sz)
 {
+    for (size_t i = 0; i < PICO_GetHeapCount(); i++)
+    {
+        if (PICO_GetHeaps()[i].sz == 0) { continue; }
+        void* ptr = PICO_HeapAllocate(&PICO_GetHeaps()[i], sz, true);
+        if (ptr != NULL) { return ptr; }
+    }
+
+    PICO_Panic("PICO_Alloc(%a) - Failed to allocate memory", sz);
     return NULL;
 }
 
 void PICO_Free(void* ptr)
 {
+    for (size_t i = 0; i < PICO_GetHeapCount(); i++)
+    {
+        if (PICO_GetHeaps()[i].sz == 0) { continue; }
+        bool freed = PICO_HeapFree(&PICO_GetHeaps()[i], ptr);
+        if (freed) { return; }
+    }
     
+    PICO_Panic("PICO_Free(%p) - Failed to free pointer to allocated memory", ptr);
 }

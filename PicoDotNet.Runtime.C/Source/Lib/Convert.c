@@ -51,9 +51,9 @@ int _ftoa_conv(int x, char str[], int d)
 }
 
 
-int PICO_StrToInt(const char* str) { return (int)PICO_StrToUInt(str); }
+int PICO_ConvertStrToInt(const char* str) { return (int)PICO_ConvertStrToUInt(str); }
 
-uint32_t PICO_StrToUInt(const char* str)
+uint32_t PICO_ConvertStrToUInt(const char* str)
 {
     int result = 0, sign = 0;
     uint32_t digit;
@@ -72,7 +72,7 @@ uint32_t PICO_StrToUInt(const char* str)
     return result;
 }
 
-uint32_t PICO_HexToUInt(const char* str)
+uint32_t PICO_ConvertHexToUInt(const char* str)
 {
     uint32_t num = 0;
     for (size_t i = 0; i < PICO_StrLen(str); i++)
@@ -89,13 +89,13 @@ uint32_t PICO_HexToUInt(const char* str)
     return num;
 }
 
-float PICO_StrToFloat(const char* str)
+float PICO_ConvertStrToFloat(const char* str)
 {
     /* TODO: Not yet implemented */
     return 0.0f;
 }
 
-char* PICO_IntToStr(int num, char* buff, int base)
+char* PICO_ConvertIntToStr(int num, char* buff, int base)
 {
     if (base < 2 || base > 32) { return buff; }
 
@@ -114,13 +114,13 @@ char* PICO_IntToStr(int num, char* buff, int base)
     return _itoa_rev(buff, 0, i - 1);
 }
 
-char* PICO_UIntToStr(uint32_t num, char* buff, int base)
+char* PICO_ConvertUIntToStr(uint32_t num, char* buff, int base)
 {
     _ultoa(num, buff, base); 
     return buff;
 }
 
-char* PICO_FloatToStr(float num, char* buff, int dot)
+char* PICO_ConvertFloatToStr(float num, char* buff, int dot)
 {
     int ipart = (int)num;
     float fpart = num - (float)ipart;
@@ -135,7 +135,7 @@ char* PICO_FloatToStr(float num, char* buff, int dot)
     return buff;
 }
 
-char* PICO_UIntToHex(uint32_t num, char* buff, uint8_t sz)
+char* PICO_ConvertUIntToHex(uint32_t num, char* buff, uint8_t sz)
 {
     static const char hexvals[] = "0123456789ABCDEF";
 
