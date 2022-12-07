@@ -1,46 +1,20 @@
-﻿using System.Drawing;
-using PicoDotNet;
-using VerminOS;
+﻿using PicoDotNet;
+using VerminOS.Commands;
+using VerminOS.Gui;
 using Console = PicoDotNet.Console;
 
 Utils.Initialize();
+
+CommandManager.Register("help", () => Console.WriteLine("help - Shows all commands.\nver - Shows the VerminOS version.\ngui - Enters GUI mode."));
+CommandManager.Register("ver", () => Console.WriteLine("VerminOS - Written using PicoDotNet"));
+CommandManager.Register("gui", GuiManager.Initialize);
 
 for (;;)
 {
     Console.Write("> ");
     var cmd = Console.ReadLine();
 
-    switch (cmd)
-    {
-        case "help":
-            Console.WriteLine("WIP!");
-            break;
-
-        case "gui":
-        {
-            Canvas.Initialize(1280, 720);
-
-            var taskbar = new Taskbar();
-            taskbar.Children.Add(new Button(taskbar, 10, 0, 70, taskbar.Height, "Window", () => WindowManager.Windows.Add(new Window(20, 20, 250, 130, "New Window"))));
-
-            for (;;)
-            {
-                Canvas.Clear(Color.Black);
-
-                WindowManager.Update();
-                taskbar.Draw();
-                taskbar.Update();
-                Mouse.Update();
-
-                Canvas.Update();
-                Utils.Process();
-            }
-        }
-    
-        default:
-            Console.WriteLine("Unknown command!");
-            break;
-    }
+    CommandManager.Run(cmd);
 
     Utils.Process();
 }

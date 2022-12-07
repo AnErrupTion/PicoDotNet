@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace VerminOS;
+namespace VerminOS.Framework;
 
 public abstract class Component
 {

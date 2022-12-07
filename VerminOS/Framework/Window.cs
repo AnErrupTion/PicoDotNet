@@ -1,7 +1,6 @@
-using System.Drawing;
 using PicoDotNet;
 
-namespace VerminOS;
+namespace VerminOS.Framework;
 
 public class Window : Component
 {
@@ -19,8 +18,8 @@ public class Window : Component
     {
         Canvas.DrawFilledRectangle(X, Y, Width, Config.TitlebarHeight, Config.AccentColor);
         Canvas.DrawFilledRectangle(X, Y + Config.TitlebarHeight, Width, Height, Color);
-        Canvas.DrawText(X + Width / 2 - Canvas.CalculateWidth(Text) / 2, Y + Config.TitlebarHeight / 2 - Canvas.CalculateHeight(Text) / 2, Text, Config.TextColor);
-        Canvas.DrawRectangle(X, Y, Width, Height + Config.TitlebarHeight, Color.DimGray);
+        Canvas.DrawText(X + Width / 2 - Canvas.CalculateWidth(Text) / 2, Y + Config.TitlebarHeight / 2 - Canvas.CalculateHeight(Text) / 2, Text, Config.BodyColor);
+        Canvas.DrawRectangle(X, Y, Width, Height + Config.TitlebarHeight, Config.BorderColor);
     }
 
     public override void Update()
@@ -55,11 +54,8 @@ public class Window : Component
         WindowManager.IsWindowMoving = _held;
     }
 
-    private bool IsTitlebarColliding()
-    {
-        return WindowManager.ActiveWindow?.X < X + Width &&
-               WindowManager.ActiveWindow.X + WindowManager.ActiveWindow.Width > X &&
-               WindowManager.ActiveWindow.Y < Y + Config.TitlebarHeight &&
-               Config.TitlebarHeight + WindowManager.ActiveWindow.Y > Y;
-    }
+    private bool IsTitlebarColliding() => WindowManager.ActiveWindow?.X < X + Width &&
+                                          WindowManager.ActiveWindow.X + WindowManager.ActiveWindow.Width > X &&
+                                          WindowManager.ActiveWindow.Y < Y + Config.TitlebarHeight &&
+                                          Config.TitlebarHeight + WindowManager.ActiveWindow.Y > Y;
 }

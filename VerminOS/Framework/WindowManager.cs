@@ -1,4 +1,4 @@
-namespace VerminOS;
+namespace VerminOS.Framework;
 
 public static class WindowManager
 {

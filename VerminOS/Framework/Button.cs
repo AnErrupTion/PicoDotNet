@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using PicoDotNet;
 
-namespace VerminOS;
+namespace VerminOS.Framework;
 
 public class Button : Component
 {
@@ -20,7 +20,7 @@ public class Button : Component
     public override void Draw()
     {
         Canvas.DrawFilledRectangle(X, Y, Width, Height, Color);
-        Canvas.DrawText(X + Width / 2 - Canvas.CalculateWidth(Text) / 2, Y, Text, Config.TextColor);
+        Canvas.DrawText(X + Width / 2 - Canvas.CalculateWidth(Text) / 2, Y + Height / 2 - Canvas.CalculateHeight(Text) / 2, Text, Config.TextColor);
     }
 
     public override void Update()
@@ -44,13 +44,7 @@ public class Button : Component
         }
     }
 
-    private bool IsClicked(MouseState state)
-    {
-        return IsHovered() && Mouse.State == state;
-    }
+    private bool IsClicked(MouseState state) => IsHovered() && Mouse.State == state;
 
-    private bool IsHovered()
-    {
-        return !WindowManager.IsWindowMoving && Mouse.IsInBounds(X, Y, Width, Height);
-    }
+    private bool IsHovered() => !WindowManager.IsWindowMoving && Mouse.IsInBounds(X, Y, Width, Height);
 }
