@@ -6,9 +6,33 @@ using System.Text;
 
 namespace PicoDotNet.Builder.Runtime;
 
+public enum BuildEventType : byte
+{
+    Unspecified,
+    Compiler,
+    Linker,
+    Emulator,
+}
+
+public class BuildEvent
+{
+    public BuildEventType Type;
+    public string         File;
+    public string         Arguments;
+
+    public BuildEvent(BuildEventType type, string file, string args) { this.Type = type; File = file; Arguments = args; }
+
+    public override string ToString()
+    {
+        return ((int)Type).ToString() + "," + File + "," + Arguments;
+    }
+}
+
 public static class BuildPaths
 {
     public const string ConfigFile = "Build/builder_config.ini";
+
+    public static List<BuildEvent> Events { get; private set; } = new List<BuildEvent>();
 
     public static string Nasm           { get; private set; } = "";
     public static string Gcc            { get; private set; } = "";

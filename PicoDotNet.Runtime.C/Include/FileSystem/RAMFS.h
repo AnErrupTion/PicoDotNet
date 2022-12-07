@@ -24,6 +24,7 @@ struct attr_pack PICO_RAMDirectory
     uint8_t         reserved[8];
 };
 
+typedef struct PICO_RAMFile PICO_RAMFile;
 struct attr_pack PICO_RAMFile 
 {
     char            name[80];
@@ -78,7 +79,7 @@ PICO_RAMDirectory* PICO_RAMDirectoryAt(PICO_RAMFS* fs, int index);
 PICO_RAMFile*      PICO_RAMFileAt(PICO_RAMFS* fs, int index);
 
 int PICO_GetRAMDirectoryIndex(PICO_RAMFS* fs, PICO_RAMDirectory* dir);
-int PICO_GetRAMFileIndex(PICO_RAMFS* fs, PICO_RAMFile* file);;
+int PICO_GetRAMFileIndex(PICO_RAMFS* fs, PICO_RAMFile* file);
 
 PICO_RAMDirectory* PICO_CreateRAMDirectoryEntry(PICO_RAMFS* fs, const char* name, int parent, bool hidden);
 PICO_RAMFile*      PICO_CreateRAMFileEntry(PICO_RAMFS* fs, const char* name, int parent, uint32_t offset, size_t sz, bool hidden);
