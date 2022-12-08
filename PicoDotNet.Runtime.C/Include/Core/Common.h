@@ -15,6 +15,7 @@
 #include <Core/Memory/Heap.h>
 #include <Core/Multitasking/Thread.h>
 #include <Core/Multitasking/Scheduler.h>
+#include <FileSystem/RAMFS.h>
 #include <HAL/Driver.h>
 #include <HAL/DriverManager.h>
 #include <HAL/System/Ports.h>

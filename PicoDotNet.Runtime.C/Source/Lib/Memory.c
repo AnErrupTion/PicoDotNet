@@ -96,3 +96,12 @@ void PICO_Free(void* ptr)
     
     PICO_Panic("PICO_Free(%p) - Failed to free pointer to allocated memory", ptr);
 }
+
+void PICO_FreeArray(void** ptr, size_t count)
+{
+    for (size_t i = 0; i < count; i++)
+    {
+        if (ptr[i] != NULL) { PICO_Free(ptr[i]); }
+    }
+    PICO_Free(ptr);
+}

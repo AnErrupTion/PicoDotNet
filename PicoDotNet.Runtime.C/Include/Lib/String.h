@@ -18,3 +18,9 @@ int PICO_StrCompare(const char* str1, const char* str2);
 
 /// @brief Check if two strings are equal @param str1 Pointer to first string @param str2 Pointer to second string @return Strings are equal
 bool PICO_StrEquals(const char* str1, const char* str2);
+
+char* PICO_StrCopy(char* dest, const char* src);
+
+char* PICO_StrRChr(const char* str, char c);
+
+char** PICO_StrSplit(const char* str, char delim, size_t* count);

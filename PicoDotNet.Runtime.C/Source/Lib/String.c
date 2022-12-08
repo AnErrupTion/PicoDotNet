@@ -49,3 +49,51 @@ int PICO_StrCompare(const char* str1, const char* str2)
 }
 
 bool PICO_StrEquals(const char* str1, const char* str2) { return PICO_StrCompare(str1, str2) == 0; }
+
+char* PICO_StrCopy(char* dest, const char* src)
+{
+    if (dest == NULL) { return NULL; }
+    if (src == NULL) { return NULL; }
+
+    int i = 0;
+    while (src[i] != 0) { dest[i] = src[i]; i++; }
+    return dest;
+}
+
+char* PICO_StrRChr(const char* str, char c)
+{
+    char *rtnval = 0;
+    do { if (*str == c) { rtnval = (char*)str; } } while (*str++);
+    return (rtnval);
+}
+
+char** PICO_StrSplit(const char* str, char delim, size_t* count)
+{
+    if (str == NULL) { return NULL; }
+    if (PICO_StrLen(str) == 0) { return NULL; }
+
+    int len = PICO_StrLen(str);
+    uint32_t num_delimeters = 0;
+
+    for(int i = 0; i < len - 1; i++) { if(str[i] == delim) { num_delimeters++; } }
+
+    uint32_t arr_size = sizeof(char*) * (num_delimeters + 1);
+    char** str_array = (char**)PICO_Alloc(arr_size);
+    int str_offset = 0;
+
+    int start = 0;
+    int end = 0;
+    while(end < len)
+    {
+        while(str[end] != delim && end < len) { end++; }
+
+        char* substr = (char*)PICO_Alloc(end - start + 1);
+        PICO_MemCopy(substr, str + start, end - start);
+        start = end + 1;
+        end++;
+        str_array[str_offset] = substr;
+        str_offset++;
+    }
+    *count = str_offset;
+    return str_array;
+}

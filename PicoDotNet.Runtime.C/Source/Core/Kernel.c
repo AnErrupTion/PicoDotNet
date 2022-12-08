@@ -7,6 +7,7 @@ extern uintptr_t _stack_bottom;
 
 static PICO_Multiboot* _mboot;
 static uint64_t      _ticks;
+static PICO_RAMFS _test_ramfs;
 
 void PICO_KernelBoot(PICO_Multiboot* mbp)
 {
@@ -29,6 +30,19 @@ void PICO_KernelBoot(PICO_Multiboot* mbp)
     PICO_InitKernelThread();
 
     PICO_InitDriverManager();
+
+    PICO_CreateRAMFS(&_test_ramfs, "Testing RAMFS", 4096, 16 * MEGABYTE);
+    PICO_CreateRAMDirectory(&_test_ramfs, "sys", false);
+    PICO_CreateRAMDirectory(&_test_ramfs, "sys/doc", false);
+    PICO_CreateRAMDirectory(&_test_ramfs, "sys/res", false);
+    PICO_CreateRAMDirectory(&_test_ramfs, "sys/res/themes", false);
+    PICO_CreateRAMDirectory(&_test_ramfs, "sys/res/fonts", false);
+    PICO_CreateRAMFile(&_test_ramfs, "sys/doc/hello.txt", "Hello world, this is a test\nLmfao\n", 35, false);
+
+    PICO_RAMFile* file = PICO_OpenRAMFile(&_test_ramfs, "sys/doc/hello.txt");
+    if (file == NULL) { PICO_Error("Failed to locate file in ramfs"); }
+    else { PICO_Log("FILE CONTENTS:\n%s\n", PICO_ConvertRAMFileOffset(&_test_ramfs, file)); }
+
 }
 
 void PICO_KernelRun()

@@ -27,3 +27,6 @@ void* PICO_Alloc(size_t sz);
 
 /// @brief Free an allocated block of memory from the heap @param ptr Pointer to allocated memory 
 void PICO_Free(void* ptr);
+
+void PICO_FreeArray(void** ptr, size_t count);
+

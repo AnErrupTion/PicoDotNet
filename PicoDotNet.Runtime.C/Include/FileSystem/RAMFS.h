@@ -53,8 +53,9 @@ typedef struct
     bool              created;
 } attr_pack PICO_RAMFS;
 
-void PICO_InitRAMFS(PICO_RAMFS* ramfs, void* data, size_t sz);
-void PICO_FreeRAMFS(PICO_RAMFS* ramfs);
+void PICO_CreateRAMFS(PICO_RAMFS* fs, const char* label, size_t max_ents, size_t sz);
+void PICO_InitRAMFS(PICO_RAMFS* fs, void* data, size_t sz);
+void PICO_FreeRAMFS(PICO_RAMFS* fs);
 
 PICO_RAMDirectory*  PICO_CreateRAMRootDirectory(PICO_RAMFS* fs, const char* label);
 PICO_RAMDirectory*  PICO_CreateRAMDirectory(PICO_RAMFS* fs, const char* path, bool hidden);
@@ -62,7 +63,7 @@ PICO_RAMFile*       PICO_CreateRAMFile(PICO_RAMFS* fs, const char* path, void* c
 PICO_RAMDirectory*  PICO_OpenRAMDirectory(PICO_RAMFS* fs, const char* path);
 PICO_RAMFile*       PICO_OpenRAMFile(PICO_RAMFS* fs, const char* path);
 PICO_RAMDirectory** PICO_GetRAMDirectories(PICO_RAMFS* fs, const char* path, size_t* sz);
-PICO_RAMFile**      PICO_GetRAMFiles(PICO_RAMFS* fs, const char path, size_t* sz);
+PICO_RAMFile**      PICO_GetRAMFiles(PICO_RAMFS* fs, const char* path, size_t* sz);
 
 bool PICO_RAMDirectoryExists(PICO_RAMFS* fs, const char* path);
 bool PICO_RAMFileExists(PICO_RAMFS* fs, const char* path);
@@ -85,5 +86,5 @@ PICO_RAMDirectory* PICO_CreateRAMDirectoryEntry(PICO_RAMFS* fs, const char* name
 PICO_RAMFile*      PICO_CreateRAMFileEntry(PICO_RAMFS* fs, const char* name, int parent, uint32_t offset, size_t sz, bool hidden);
 void*              PICO_NextFreeRAMFSEntry(PICO_RAMFS* fs);
 
-#define RAMFS_ENTSZ (sizeof(Kernel::ramfs_dir_t))
+#define RAMFS_ENTSZ (sizeof(PICO_RAMDirectory))
 #define RAMFS_ROOT  0
