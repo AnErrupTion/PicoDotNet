@@ -1,6 +1,0 @@
-{
-    "cmake.sourceDirectory": "${workspaceFolder}/PicoDotNet.Interpreter",
-    "files.associations": {
-        "stdlib.h": "c"
-    }
-}
