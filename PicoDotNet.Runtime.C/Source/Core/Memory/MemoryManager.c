@@ -27,9 +27,10 @@ void PICO_InitMemMgr(bool zero_free)
     _count = 0;
 
     PICO_MemoryMapEntry* mmap   = PICO_GetMultiboot()->mmap;
-    size_t             mmapsz = PICO_GetMultiboot()->mmap_len / sizeof(PICO_MemoryMapEntry);
+    size_t               mmapsz = PICO_GetMultiboot()->mmap_len / sizeof(PICO_MemoryMapEntry);
     for (size_t i = 0; i < mmapsz; i++)
     {
+        if (mmap[i].address > UINT32_MAX || mmap[i].size > UINT32_MAX) { continue; }
         if (mmap[i].address == PICO_GetKernelStart())
         {
             PICO_MapMemBlock((PICO_MemoryBlock){ (uint32_t)mmap[i].address, PICO_GetKernelSize(), MEM_KERNEL });
