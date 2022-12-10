@@ -126,3 +126,5 @@ void PICO_TerminateThread(PICO_Thread* thread)
 void PICO_ToggleScheduler(bool enabled) { _ready = enabled; }
 
 uint32_t PICO_GenerateThreadID() { return _tid++; }
+
+uint32_t PICO_GetThreadCount() { return _threads.count; }

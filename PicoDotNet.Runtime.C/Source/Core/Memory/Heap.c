@@ -47,7 +47,7 @@ bool PICO_HeapFree(PICO_Heap* heap, void* ptr)
             if (heap->auto_collect) 
             { 
                 size_t collected = PICO_HeapCollect(heap); 
-                if (collected > 0) { PICO_Log("%s Collected and merged %u free heap blocks\n", DEBUG_INFO, collected); }
+                //if (collected > 0) { PICO_Log("%s Collected and merged %u free heap blocks\n", DEBUG_INFO, collected); }
             }
             return true;
         }

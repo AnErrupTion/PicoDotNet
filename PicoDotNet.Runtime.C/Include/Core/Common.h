@@ -10,6 +10,7 @@
 #include <Core/Kernel.h>
 #include <Core/Multiboot.h>
 #include <Core/Debug.h>
+#include <Core/Tests.h>
 #include <Core/Memory/MemoryManager.h>
 #include <Core/Memory/HeapManager.h>
 #include <Core/Memory/Heap.h>

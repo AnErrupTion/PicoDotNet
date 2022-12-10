@@ -43,63 +43,63 @@ void PICO_PrintArgsTo(char* buff, const char* fmt, va_list args)
             else if (*fmt == 'd')
             {
                 PICO_MemSet(_workbuff, 0, PRINT_WORKSZ);
-                PICO_StrConcat(_buffer, PICO_ConvertIntToStr(va_arg(args, int), _workbuff, 10));
+                PICO_StrConcat(buff, PICO_ConvertIntToStr(va_arg(args, int), _workbuff, 10));
             }
             else if (*fmt == 'u')
             {
                 PICO_MemSet(_workbuff, 0, PRINT_WORKSZ);
-                PICO_StrConcat(_buffer, PICO_ConvertUIntToStr(va_arg(args, uint32_t), _workbuff, 10));
+                PICO_StrConcat(buff, PICO_ConvertUIntToStr(va_arg(args, uint32_t), _workbuff, 10));
             }
             else if (*fmt == 'x')
             {
                 PICO_MemSet(_workbuff, 0, PRINT_WORKSZ);
-                PICO_StrConcat(_buffer, PICO_ConvertUIntToStr(va_arg(args, uint32_t), _workbuff, 16));
+                PICO_StrConcat(buff, PICO_ConvertUIntToStr(va_arg(args, uint32_t), _workbuff, 16));
             }
             else if (*fmt == '2')
             {
                 fmt++;
-                if (*fmt != 'x' && *fmt != 'X') { PICO_StrAppend(_buffer, *fmt); fmt++; continue; }
+                if (*fmt != 'x' && *fmt != 'X') { PICO_StrAppend(buff, *fmt); fmt++; continue; }
                 PICO_MemSet(_workbuff, 0, PRINT_WORKSZ);
-                PICO_StrConcat(_buffer, PICO_ConvertUIntToHex(va_arg(args, uint32_t), _workbuff, 1));
+                PICO_StrConcat(buff, PICO_ConvertUIntToHex(va_arg(args, uint32_t), _workbuff, 1));
             }
             else if (*fmt == '4')
             {
                 fmt++;
-                if (*fmt != 'x' && *fmt != 'X') { PICO_StrAppend(_buffer, *fmt); fmt++; continue; }
+                if (*fmt != 'x' && *fmt != 'X') { PICO_StrAppend(buff, *fmt); fmt++; continue; }
                 PICO_MemSet(_workbuff, 0, PRINT_WORKSZ);
-                PICO_StrConcat(_buffer, PICO_ConvertUIntToHex(va_arg(args, uint32_t), _workbuff, 2));
+                PICO_StrConcat(buff, PICO_ConvertUIntToHex(va_arg(args, uint32_t), _workbuff, 2));
             }
             else if (*fmt == '8')
             {
                 fmt++;
-                if (*fmt != 'x' && *fmt != 'X') { PICO_StrAppend(_buffer, *fmt); fmt++; continue; }
+                if (*fmt != 'x' && *fmt != 'X') { PICO_StrAppend(buff, *fmt); fmt++; continue; }
                 PICO_MemSet(_workbuff, 0, PRINT_WORKSZ);
-                PICO_StrConcat(_buffer, PICO_ConvertUIntToHex(va_arg(args, uint32_t), _workbuff, 4));
+                PICO_StrConcat(buff, PICO_ConvertUIntToHex(va_arg(args, uint32_t), _workbuff, 4));
             }
             else if (*fmt == 'p')
             {
                 PICO_MemSet(_workbuff, 0, PRINT_WORKSZ);
-                PICO_StrConcat(_buffer, PICO_ConvertUIntToHex(va_arg(args, uint32_t), _workbuff, 4));
+                PICO_StrConcat(buff, PICO_ConvertUIntToHex(va_arg(args, uint32_t), _workbuff, 4));
             }
             else if (*fmt == 'a')
             {
                 PICO_MemSet(_workbuff, 0, PRINT_WORKSZ);
 
                 uint32_t v = va_arg(args, uint32_t);
-                if (v < KILOBYTE)                       { PICO_StrConcat(_buffer, PICO_ConvertUIntToStr(v, _workbuff, 10)); PICO_StrConcat(_buffer, "B"); }
-                else if (v >= KILOBYTE && v < MEGABYTE) { PICO_StrConcat(_buffer, PICO_ConvertUIntToStr(v / KILOBYTE, _workbuff, 10)); PICO_StrConcat(_buffer, "KB"); }
-                else if (v >= MEGABYTE && v < GIGABYTE) { PICO_StrConcat(_buffer, PICO_ConvertUIntToStr(v / MEGABYTE, _workbuff, 10)); PICO_StrConcat(_buffer, "MB"); }
-                else if (v >= GIGABYTE)                 { PICO_StrConcat(_buffer, PICO_ConvertUIntToStr(v / GIGABYTE, _workbuff, 10)); PICO_StrConcat(_buffer, "GB"); }
+                if (v < KILOBYTE)                       { PICO_StrConcat(buff, PICO_ConvertUIntToStr(v, _workbuff, 10)); PICO_StrConcat(buff, "B"); }
+                else if (v >= KILOBYTE && v < MEGABYTE) { PICO_StrConcat(buff, PICO_ConvertUIntToStr(v / KILOBYTE, _workbuff, 10)); PICO_StrConcat(buff, "KB"); }
+                else if (v >= MEGABYTE && v < GIGABYTE) { PICO_StrConcat(buff, PICO_ConvertUIntToStr(v / MEGABYTE, _workbuff, 10)); PICO_StrConcat(buff, "MB"); }
+                else if (v >= GIGABYTE)                 { PICO_StrConcat(buff, PICO_ConvertUIntToStr(v / GIGABYTE, _workbuff, 10)); PICO_StrConcat(buff, "GB"); }
             }
             else if (*fmt == 'f')
             {
                 PICO_MemSet(_workbuff, 0, PRINT_WORKSZ);
-                PICO_StrConcat(_buffer, PICO_ConvertFloatToStr(va_arg(args, float), _workbuff, 3));
+                PICO_StrConcat(buff, PICO_ConvertFloatToStr(va_arg(args, float), _workbuff, 3));
             }
-            else if (*fmt == 's') { PICO_StrConcat(_buffer, va_arg(args, char*)); }
-            else { PICO_StrAppend(_buffer, *fmt); }
+            else if (*fmt == 's') { PICO_StrConcat(buff, va_arg(args, char*)); }
+            else { PICO_StrAppend(buff, *fmt); }
         }
-        else { PICO_StrAppend(_buffer, *fmt); }
+        else { PICO_StrAppend(buff, *fmt); }
         fmt++;
     }
 }

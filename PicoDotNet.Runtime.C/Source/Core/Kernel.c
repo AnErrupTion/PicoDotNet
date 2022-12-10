@@ -11,39 +11,42 @@ static PICO_RAMFS _test_ramfs;
 
 void PICO_KernelBoot(PICO_Multiboot* mbp)
 {
+    // set local multiboot pointer so we can access it after we leave this function
     _mboot = mbp;
+
+    // reset tick count
     _ticks = 0;
 
+    // get the system ready enough for debugging output
     PICO_FlushBootScreen();
     PICO_FlushPrintBuffers();
     PICO_InitDebug();
-    
     PICO_Log("%s Booting DotNetPico...\n", DEBUG_INFO);
 
+    // parse multiboot memory map and passover to our own memory map
     PICO_InitMemMgr(true);
+
+    // initalize kernel heap - for the moment it uses all available memory left at this point
     PICO_InitHeapManager();
 
+    // initialize descriptor tables and interrupts
     PICO_InitGDT();
     PICO_InitIDT();
 
+    // initialize multitasking and create kernel thread
     PICO_InitScheduler();
     PICO_InitKernelThread();
 
+    // initialize device/driver manager
     PICO_InitDriverManager();
 
+    // assume our ramdisk always exists and is the first module - then load it
     PICO_MemoryBlock* mod = PICO_GetMemBlockByType(MEM_MODULE);
-    PICO_Log("%s RAMDISK Module: %p-%p\n", DEBUG_INFO, mod->addr, mod->addr + mod->sz);
-
     PICO_InitRAMFS(&_test_ramfs, (void*)mod->addr, mod->sz);
 
-    PICO_RAMFile* file = PICO_OpenRAMFile(&_test_ramfs, "lorem_ipsum.txt");
-    PICO_Log("FILE: %s\n", PICO_ReadRAMFileData(&_test_ramfs, file));
-
-    size_t fc = 0;
-    PICO_RAMFile** files = PICO_GetRAMFiles(&_test_ramfs, &fc);
-    PICO_Log("%s Showing all RAMDISK files:\n", DEBUG_INFO);
-    for (size_t i = 0; i < fc; i++) { PICO_Log("- Name:%s Hidden:%d Size:%a\n", files[i]->name, files[i]->hidden, files[i]->size); }
-    PICO_Free(files);
+    // run system tests before completing boot sequence
+    //PICO_SysTestHeap(10);
+    //PICO_SysTestThreading(5);
 }
 
 void PICO_KernelRun()

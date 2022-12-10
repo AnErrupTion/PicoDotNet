@@ -17,23 +17,22 @@ void PICO_OnThreadReturn()
     PICO_Log("%s Thread %x(%s) has exited with code %d\n", DEBUG_INFO, THIS_THREAD->id, THIS_THREAD->name, exitcode);
 
     asm volatile("sti");
-    while (true) { PICO_SwitchThread(true); }
-    
+    while (true) { PICO_SwitchThread(true); } 
 }
 
 PICO_Thread* PICO_NewThread(const char* name, size_t stacksz, PICO_ThreadProtocol protocol, THREAD_PRIORITY priority, PICO_PtrList args)
 {    
     PICO_Thread* thread = PICO_Alloc(sizeof(PICO_Thread*));
-    thread->name      = PICO_NewString(name);
-    thread->stacksz   = PICO_Clamp(stacksz, STACKSZ_MIN, STACKSZ_MAX);
-    thread->stack     = PICO_Alloc(thread->stacksz);
-    thread->id        = PICO_GenerateThreadID();
-    thread->protocol  = protocol;
-    thread->priority  = priority;
-    thread->lock      = UNLOCKED;
-    thread->state     = THREAD_HALTED;
-    thread->args      = PICO_DuplicatePtrList(&args);
-    thread->time      = (PICO_ThreadTime) { 0, 0, 0 };
+    thread->name        = PICO_NewString(name);
+    thread->stacksz     = PICO_Clamp(stacksz, STACKSZ_MIN, STACKSZ_MAX);
+    thread->stack       = PICO_Alloc(thread->stacksz);
+    thread->id          = PICO_GenerateThreadID();
+    thread->protocol    = protocol;
+    thread->priority    = priority;
+    thread->lock        = UNLOCKED;
+    thread->state       = THREAD_HALTED;
+    thread->args        = PICO_DuplicatePtrList(&args);
+    thread->time        = (PICO_ThreadTime) { 0, 0, 0 };
     
     uint32_t* stk = (uint32_t*)((uintptr_t)thread->stack + (thread->stacksz - sizeof(PICO_ThreadRegisters) - 16));
     *--stk = (uint32_t)thread;
