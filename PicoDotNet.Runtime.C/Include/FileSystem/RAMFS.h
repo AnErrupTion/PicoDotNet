@@ -36,3 +36,5 @@ void PICO_InitRAMFS(PICO_RAMFS* fs, void* data, size_t sz);
 PICO_RAMFile* PICO_OpenRAMFile(PICO_RAMFS* fs, const char* name);
 void* PICO_ReadRAMFileData(PICO_RAMFS* fs, PICO_RAMFile* file);
 bool PICO_RAMFileExists(PICO_RAMFS* fs, const char* name);
+
+PICO_RAMFile** PICO_GetRAMFiles(PICO_RAMFS* fs, size_t* sz);

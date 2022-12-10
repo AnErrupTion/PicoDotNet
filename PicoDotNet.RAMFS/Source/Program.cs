@@ -22,7 +22,7 @@ public static class Program
             string[] lines = File.ReadAllLines(args[0]);
             foreach (string line in lines) { CommandParser.Execute(line); }
         }
-        Console.Read();
+        Environment.Exit(0);
     }
 
     private static void RegisterCommands()

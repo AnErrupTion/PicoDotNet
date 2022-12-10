@@ -36,9 +36,14 @@ void PICO_KernelBoot(PICO_Multiboot* mbp)
 
     PICO_InitRAMFS(&_test_ramfs, (void*)mod->addr, mod->sz);
 
-    PICO_RAMFile* file = PICO_OpenRAMFile(&_test_ramfs, "hello.txt");
-    if (file == NULL) { PICO_Panic("FAILED TO LOCATE FILE"); }
-    else { PICO_Log("File contents:\n%s\n", (char*)PICO_ReadRAMFileData(&_test_ramfs, file)); }
+    PICO_RAMFile* file = PICO_OpenRAMFile(&_test_ramfs, "lorem_ipsum.txt");
+    PICO_Log("FILE: %s\n", PICO_ReadRAMFileData(&_test_ramfs, file));
+
+    size_t fc = 0;
+    PICO_RAMFile** files = PICO_GetRAMFiles(&_test_ramfs, &fc);
+    PICO_Log("%s Showing all RAMDISK files:\n", DEBUG_INFO);
+    for (size_t i = 0; i < fc; i++) { PICO_Log("- Name:%s Hidden:%d Size:%a\n", files[i]->name, files[i]->hidden, files[i]->size); }
+    PICO_Free(files);
 }
 
 void PICO_KernelRun()

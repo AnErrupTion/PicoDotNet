@@ -22,6 +22,7 @@ public class CommandDeclarations
     public static Command SET_GRUB      { get; private set; } = new Command("SET_GRUB",      CommandHandlers.SET_GRUB);
     public static Command SET_LIMINE    { get; private set; } = new Command("SET_LIMINE",    CommandHandlers.SET_LIMINE);
     public static Command SET_EMULATOR  { get; private set; } = new Command("SET_EMULATOR",  CommandHandlers.SET_EMULATOR);
+    public static Command SET_RAMFSMGR  { get; private set; } = new Command("SET_RAMFSMGR",  CommandHandlers.SET_RAMFSMGR);
 
     public static Command SET_DIR       { get; private set; } = new Command("SET_DIR", CommandHandlers.SET_DIR);
 
@@ -40,6 +41,7 @@ public class CommandDeclarations
     public static Command LINK_PATH { get; private set; } = new Command("LINK_PATH", CommandHandlers.LINK_PATH);
 
     public static Command MK_ISO { get; private set; } = new Command("MK_ISO", CommandHandlers.MK_ISO);
+    public static Command MK_RAMDSIK { get; private set; } = new Command("MK_RAMDISK", CommandHandlers.MK_RAMDISK);
 
     public static Command LIMINE { get; private set; } = new Command("LIMINE", CommandHandlers.LIMINE);
 
@@ -68,6 +70,7 @@ public static class CommandHandlers
                 case "grub":      { Global.Grub       = file; break; }
                 case "limine":    { Global.Limine     = file; break; }
                 case "emulator":  { Global.Emulator   = file; break; }
+                case "ramfsmgr":  { Global.RAMFSMgr   = file; break; }
             }
 
             Debug.Log("Set executable - Type:%s Value:%s\n", type.ToString().PadRight(10, ' '), file);
@@ -150,6 +153,8 @@ public static class CommandHandlers
     }
 
     public static void SET_EMULATOR(string input, List<string> args) { SetExecutable(input, args, "emulator"); }
+
+    public static void SET_RAMFSMGR(string input, List<string> args) { SetExecutable(input, args, "ramfsmgr"); }
 
     public static void SET_DIR(string input, List<string> args)
     {
@@ -291,6 +296,15 @@ public static class CommandHandlers
             iso.Build(Global.Path + args[1]);
             Debug.Log("Successfully created ISO image at '%s'\n", Global.Path + args[1]);
         }
+    }
+
+    public static void MK_RAMDISK(string input, List<string> args)
+    {
+        Process proc = StartProcess(Global.RAMFSMgr, input.Substring(11));
+        proc.WaitForExit();
+
+        if (proc.ExitCode != 0) { Debug.Error("Failed to create RAMDISK"); return; }
+        Debug.Log("Successfully created RAMDISK image");
     }
 
     public static void LIMINE(string input, List<string> args)

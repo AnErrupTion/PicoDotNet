@@ -33,6 +33,7 @@ public static class Program
         CommandParser.Register(CommandDeclarations.SET_GRUB);
         CommandParser.Register(CommandDeclarations.SET_LIMINE);
         CommandParser.Register(CommandDeclarations.SET_EMULATOR);
+        CommandParser.Register(CommandDeclarations.SET_RAMFSMGR);
         CommandParser.Register(CommandDeclarations.SET_DIR);
         CommandParser.Register(CommandDeclarations.MK_DIR);
         CommandParser.Register(CommandDeclarations.RM_DIR);
@@ -44,6 +45,7 @@ public static class Program
         CommandParser.Register(CommandDeclarations.LINK);
         CommandParser.Register(CommandDeclarations.LINK_PATH);
         CommandParser.Register(CommandDeclarations.MK_ISO);
+        CommandParser.Register(CommandDeclarations.MK_RAMDSIK);
         CommandParser.Register(CommandDeclarations.LIMINE);
         CommandParser.Register(CommandDeclarations.RUN);
     }
