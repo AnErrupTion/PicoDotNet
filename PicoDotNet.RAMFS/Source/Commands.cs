@@ -4,21 +4,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Threading;
-using System.Diagnostics;
+using PicoDotNet.Builder.Library;
 
 namespace PicoDotNet.RAMFS;
 
-public class Command
+public class CommandDeclarations
 {
-    public string Name  { get; private set; }
-    public Action<string, List<string>> Handler { get; private set; }
-
-    public Command(string name, Action<string, List<string>> handler)
-    {
-        this.Name    = name;
-        this.Handler = handler;
-    }
-
     public static Command NEW   { get; private set; } = new Command("NEW",  CommandHandlers.NEW);
     public static Command SAVE  { get; private set; } = new Command("SAVE", CommandHandlers.SAVE);
     public static Command LOAD  { get; private set; } = new Command("LOAD", CommandHandlers.LOAD);
@@ -53,11 +44,6 @@ public static class CommandHandlers
         string fname = input.Substring(5);
         File.WriteAllBytes(fname, Program.RAMFS.Data);
         Debug.Log("Saved image file to '%s'\n", fname);
-        for (int i = 0; i < 256; i++)
-        {
-            if (i % 16 == 0) { Debug.Log("\n"); }
-            Debug.Log(Program.RAMFS.Data[i].ToString("X2") + " ");
-        }
     }
 
     public static void LOAD(string input, List<string> args)

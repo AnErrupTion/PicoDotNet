@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using PicoDotNet.Builder.Library;
 
 namespace PicoDotNet.RAMFS;
 
@@ -12,6 +13,8 @@ public static class Program
     private static void Main(string[] args)
     {
         Debug.Log("PicoDotNet RAMFS Utility\n");
+        RegisterCommands();
+        
         if (args.Length == 0) { Debug.Error("No input file specified."); }
         else
         {
@@ -20,5 +23,15 @@ public static class Program
             foreach (string line in lines) { CommandParser.Execute(line); }
         }
         Console.Read();
+    }
+
+    private static void RegisterCommands()
+    {
+        CommandParser.Register(CommandDeclarations.NEW);
+        CommandParser.Register(CommandDeclarations.SAVE);
+        CommandParser.Register(CommandDeclarations.LOAD);
+        CommandParser.Register(CommandDeclarations.ADD);
+        CommandParser.Register(CommandDeclarations.ADDN);
+        CommandParser.Register(CommandDeclarations.LIST);
     }
 }

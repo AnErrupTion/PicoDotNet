@@ -1,14 +1,12 @@
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
+namespace PicoDotNet.Builder.Library;
 
-namespace PicoDotNet.RAMFS;
 
 public static class CommandParser
 {
     public static string Path { get { return Directory.GetCurrentDirectory(); } } 
+    public static List<Command> Commands { get; private set; } = new List<Command>();
+
+    public static void DefaultCommandHandler(string input, List<string> args) { Debug.Error("Invalid input '%s'", input); }
 
     public static void Execute(string input)
     {
@@ -17,7 +15,7 @@ public static class CommandParser
         string[] parts   = FormatInput(input);
         string   cmdname = parts[0].ToUpper();
 
-        foreach (var cmd in Command.List)
+        foreach (var cmd in Commands)
         {
             if (cmd.Name == cmdname)
             {
@@ -28,18 +26,17 @@ public static class CommandParser
         Debug.Error("Invalid command '%s'", cmdname);
     }
 
+    public static void Clear() { Commands.Clear(); }
+
+    public static void Register(Command cmd) { Commands.Add(cmd); }
+
+    public static void Unregister(Command cmd) { Commands.Remove(cmd); }
+
     public static Command FromName(string name)
     {
-        foreach (var cmd in Command.List) { if (cmd.Name == name) { return cmd; } }
+        foreach (var cmd in Commands) { if (cmd.Name == name) { return cmd; } }
         Debug.Error("No command with name '%s'", name);
-        return new Command("", null);
-    }
-
-    public static string FormatPath(string path, bool ending_slash = true)
-    {
-        path = path.Replace("\\", "/");
-        if (!path.EndsWith("/") && ending_slash) { path += "/"; }
-        return path;
+        return new Command("", DefaultCommandHandler);
     }
 
     private static string[] FormatInput(string input)
