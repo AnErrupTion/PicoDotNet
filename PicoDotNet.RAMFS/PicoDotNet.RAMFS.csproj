@@ -7,10 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
- <ItemGroup>
-     <Reference Include="PicoDotNet.Builder.Library">
-       <HintPath>../bin/PicoDotNet.Builder.Library.dll</HintPath>
-     </Reference>
-    </ItemGroup>
-
 </Project>

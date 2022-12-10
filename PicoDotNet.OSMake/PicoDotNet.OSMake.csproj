@@ -1,10 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
+    <OutDir>../bin</OutDir>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
+  <ItemGroup>
+    <Reference Include="PicoDotNet.Builder.Library">
+      <HintPath>../bin/PicoDotNet.Builder.Library.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DiscUtils.Iso9660" Version="0.16.4"/>
+  </ItemGroup>
 </Project>
