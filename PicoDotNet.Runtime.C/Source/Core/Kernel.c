@@ -31,18 +31,14 @@ void PICO_KernelBoot(PICO_Multiboot* mbp)
 
     PICO_InitDriverManager();
 
-    PICO_CreateRAMFS(&_test_ramfs, "Testing RAMFS", 4096, 16 * MEGABYTE);
-    PICO_CreateRAMDirectory(&_test_ramfs, "sys", false);
-    PICO_CreateRAMDirectory(&_test_ramfs, "sys/doc", false);
-    PICO_CreateRAMDirectory(&_test_ramfs, "sys/res", false);
-    PICO_CreateRAMDirectory(&_test_ramfs, "sys/res/themes", false);
-    PICO_CreateRAMDirectory(&_test_ramfs, "sys/res/fonts", false);
-    PICO_CreateRAMFile(&_test_ramfs, "sys/doc/hello.txt", "Hello world, this is a test\nLmfao\n", 35, false);
+    PICO_MemoryBlock* mod = PICO_GetMemBlockByType(MEM_MODULE);
+    PICO_Log("%s RAMDISK Module: %p-%p\n", DEBUG_INFO, mod->addr, mod->addr + mod->sz);
 
-    PICO_RAMFile* file = PICO_OpenRAMFile(&_test_ramfs, "sys/doc/hello.txt");
-    if (file == NULL) { PICO_Error("Failed to locate file in ramfs"); }
-    else { PICO_Log("FILE CONTENTS:\n%s\n", PICO_ConvertRAMFileOffset(&_test_ramfs, file)); }
+    PICO_InitRAMFS(&_test_ramfs, (void*)mod->addr, mod->sz);
 
+    PICO_RAMFile* file = PICO_OpenRAMFile(&_test_ramfs, "hello.txt");
+    if (file == NULL) { PICO_Panic("FAILED TO LOCATE FILE"); }
+    else { PICO_Log("File contents:\n%s\n", (char*)PICO_ReadRAMFileData(&_test_ramfs, file)); }
 }
 
 void PICO_KernelRun()

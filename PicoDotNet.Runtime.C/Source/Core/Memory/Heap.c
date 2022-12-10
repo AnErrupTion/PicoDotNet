@@ -87,7 +87,7 @@ bool PICO_HeapMerge(PICO_Heap* heap, PICO_HeapBlock* blk1, PICO_HeapBlock* blk2)
 PICO_HeapBlock* PICO_HeapRequestBlock(PICO_Heap* heap, size_t sz)
 {
     if (heap == NULL) { PICO_Panic("PICO_HeapSize(00000000, %a) - Attempt to access null heap", sz); return NULL; }
-    if (sz   == 0)    { PICO_Panic("PICO_HeapRequestBlock(%p, 0) - Attempt to request 0 byte heap block"); return NULL; }
+    if (sz   == 0)    { PICO_Panic("PICO_HeapRequestBlock(%p, 0) - Attempt to request 0 byte heap block", heap); return NULL; }
     
     for (size_t i = 0; i < heap->max; i++)
     {

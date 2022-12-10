@@ -39,6 +39,25 @@ void PICO_InitMemMgr(bool zero_free)
         else { PICO_MapMemBlock((PICO_MemoryBlock){ (uint32_t)mmap[i].address, (uint32_t)mmap[i].size, ((mmap[i].address < PICO_GetKernelStart() && mmap[i].type == MEM_FREE) ? MEM_UNUSED : mmap[i].type) }); }
     }
 
+    PICO_MultibootModule* mods = PICO_GetMultiboot()->modules;
+    for (size_t i = 0; i < PICO_GetMultiboot()->modules_count; i++)
+    {
+        if (mods[i].address_start != 0 && mods[i].address_end != 0)
+        {
+            PICO_MapMemBlock((PICO_MemoryBlock){ mods[i].address_start, mods[i].address_end - mods[i].address_start, MEM_MODULE });
+        }
+    }
+
+    for (size_t i = 0; i < MEMBLK_MAX; i++)
+    {
+        if (_blocks[i].addr == mods[0].address_start && _blocks[i].type == MEM_FREE)
+        {
+            size_t sz = mods[0].address_end - mods[0].address_start;
+            _blocks[i].addr += sz;
+            _blocks[i].sz   -= sz;
+        }
+    }
+
     if (zero_free) { PICO_ClearFreeMemory(); }
     PICO_Log("%s Kernel memory - Region:%p:%p, Size:%uKB\n", DEBUG_INFO, PICO_GetKernelStart(), PICO_GetKernelEnd(), PICO_GetKernelSize() / KILOBYTE);
     PICO_Log("%s Kernel stack  - Region:%p:%p, Size:%uKB\n", DEBUG_INFO, PICO_GetKernelStackBottom(), PICO_GetKernelStackTop(), PICO_GetKernelStackSize() / KILOBYTE);
@@ -51,7 +70,7 @@ void PICO_ClearFreeMemory()
 
     for (size_t i = 0; i < MEMBLK_MAX; i++)
     {
-        if (_blocks[i].type == MEM_FREE) { PICO_MemSet((void*)_blocks[i].addr, 0, _blocks[i].sz); PICO_Log("."); }
+        if (_blocks[i].type == MEM_FREE) { PICO_MemSet((void*)_blocks[i].addr, 0, _blocks[i].sz); PICO_Log("Zero-filled %p-%p\n", _blocks[i].addr, _blocks[i].addr + _blocks[i].sz); }
     }
     PICO_Log("\n%s Finished zeroing available free memory\n", DEBUG_OK);;
 }
@@ -138,6 +157,12 @@ PICO_MemoryBlock* PICO_GetMemBlockAt(int index)
 {
     if (index < 0 || index >= MEMBLK_MAX) { PICO_Panic("PICO_GetMemBlockAt(%d) - Invalid index", index); return NULL; }
     return &_blocks[index];
+}
+
+PICO_MemoryBlock* PICO_GetMemBlockByType(MEMORY_TYPE type)
+{
+    for (size_t i = 0; i < MEMBLK_MAX; i++) { if (_blocks[i].type == type) { return &_blocks[i]; } }
+    return NULL;
 }
 
 PICO_MemoryBlock* PICO_GetMemBlocks() { return _blocks; }

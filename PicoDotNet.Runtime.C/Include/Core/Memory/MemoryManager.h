@@ -40,6 +40,8 @@ void PICO_UnmapMemBlock(PICO_MemoryBlock* blk);
 PICO_MemoryBlock* PICO_GetMemBlock(uintptr_t addr);
 PICO_MemoryBlock* PICO_GetMemBlockAt(int index);
 
+PICO_MemoryBlock* PICO_GetMemBlockByType(MEMORY_TYPE type);
+
 PICO_MemoryBlock* PICO_GetMemBlocks();
 
 size_t PICO_GetMemBlockCount();

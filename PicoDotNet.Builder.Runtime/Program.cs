@@ -52,6 +52,7 @@ public static class Program
         using var cd = File.OpenRead("Build/limine-cd.bin");
         using var sys = File.OpenRead("Build/limine.sys");
         using var kernel = File.OpenRead("Bin/Kernel.elf");
+        using var ramdisk = File.OpenRead("Build/ramdisk.img");
 
         var iso = new CDBuilder
         {
@@ -60,8 +61,9 @@ public static class Program
             UpdateIsolinuxBootTable = true
         };
         iso.AddFile("limine.sys", sys);
-        iso.AddFile("limine.cfg", Encoding.ASCII.GetBytes("TIMEOUT=0\n:PicoDotNet\nPROTOCOL=multiboot1\nKERNEL_PATH=boot:///kernel.elf"));
+        iso.AddFile("limine.cfg", Encoding.ASCII.GetBytes("TIMEOUT=0\n:PicoDotNet\nPROTOCOL=multiboot1\nKERNEL_PATH=boot:///kernel.elf\nMODULE_PATH=boot:///ramdisk.img\n"));
         iso.AddFile("kernel.elf", kernel);
+        iso.AddFile("ramdisk.img", ramdisk);
         iso.SetBootImage(cd, BootDeviceEmulation.NoEmulation, 0);
         iso.Build("Bin/PicoDotNet.iso");
 

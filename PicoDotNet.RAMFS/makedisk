@@ -1,0 +1,3 @@
+new 4096 4194304
+addn test_files
+save ramdisk.img
