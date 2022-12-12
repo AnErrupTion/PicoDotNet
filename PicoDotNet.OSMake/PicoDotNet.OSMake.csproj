@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  
   <PropertyGroup>
     <OutDir>../bin</OutDir>
     <OutputType>Exe</OutputType>
@@ -6,12 +7,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="PicoDotNet.Builder.Library">
-      <HintPath>../bin/PicoDotNet.Builder.Library.dll</HintPath>
-    </Reference>
+    <PackageReference Include="DiscUtils.Iso9660" Version="0.16.4" />
   </ItemGroup>
+  
   <ItemGroup>
-    <PackageReference Include="DiscUtils.Iso9660" Version="0.16.4"/>
+    <ProjectReference Include="..\PicoDotNet.Builder.Library\PicoDotNet.Builder.Library.csproj" />
   </ItemGroup>
+  
 </Project>

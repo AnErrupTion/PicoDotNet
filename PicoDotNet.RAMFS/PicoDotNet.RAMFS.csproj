@@ -9,9 +9,7 @@
   </PropertyGroup>
 
    <ItemGroup>
-    <Reference Include="PicoDotNet.Builder.Library">
-      <HintPath>../bin/PicoDotNet.Builder.Library.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+     <ProjectReference Include="..\PicoDotNet.Builder.Library\PicoDotNet.Builder.Library.csproj" />
+   </ItemGroup>
 
 </Project>

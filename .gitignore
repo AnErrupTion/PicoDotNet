@@ -31,14 +31,6 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
-# CMake build
-build/
-PicoDotNet.Interpreter/CMakeFiles/
-PicoDotNet.Interpreter/PicoDotNet.Interpreter
-PicoDotNet.Interpreter/cmake_install.cmake
-PicoDotNet.Interpreter/CMakeCache.txt
-PicoDotNet.Interpreter/Makefile
-
 # IDE-specific configuration directories
 .idea/
 .vscode/
@@ -64,12 +56,6 @@ nunit-*.xml
 [Dd]ebugPS/
 [Rr]eleasePS/
 dlldata.c
-
-# Configuration file for builder
-Build/builder_config.ini
-
-# Cross compiler
-Build/i686-elf-tools-windows/
 
 # Benchmark Results
 BenchmarkDotNet.Artifacts/
@@ -367,6 +353,8 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-PicoDotNet.Runtime.C/Build/builder_config.ini
-PicoDotNet.Interpreter/TestApp/net7.0
-PicoDotNet.Interpreter/TestApp/obj
+# Windows binaries for GCC cross compiler
+Dependencies/i686-elf-tools-windows/
+
+# RAMDisk
+PicoDotNet.RAMFS/ramdisk.img

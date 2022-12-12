@@ -1,0 +1,16 @@
+SET_ASSEMBLER ../Dependencies/nasm.exe
+SET_COMPILER  ../Dependencies/i686-elf-tools-windows/bin/i686-elf-gcc.exe
+SET_LINKER    ../Dependencies/i686-elf-tools-windows/bin/i686-elf-ld.exe
+SET_OBJDUMP   !
+SET_LIMINE    ../Dependencies/Limine/
+SET_EMULATOR  C:/Program Files/qemu/qemu-system-i386.exe
+
+RMMK_DIR Bin
+
+ASSEMBLE_PATH    Bin            Source      -felf32
+COMPILE_PATH     Bin            Source      -IInclude -nostdlib -ffreestanding -Wall
+LINK_PATH        Bin/kernel.elf Bin         -T Build/linker.ld
+
+MK_ISO Bin/PicoDotNet.iso Build/limine.cfg Bin/kernel.elf
+LIMINE Bin/PicoDotNet.iso --force-mbr
+RUN Bin/PicoDotNet.iso -m 1024M -usb -vga std -serial stdio -boot d -device AC97 -rtc base=localtime -no-reboot -no-shutdown
