@@ -20,7 +20,7 @@ public static class Debug
                     else if (fmt[i] == 'l') { output += ((ulong)args[a++]).ToString(); }
                     else if (fmt[i] == 'f') { output += ((float)args[a++]).ToString(); }
                     else if (fmt[i] == 'p') { output += ((uint)args[a++]).ToString("X8"); }
-                    else if (fmt[i] == 'c') { output += ((char)args[a++]); }
+                    else if (fmt[i] == 'c') { output += (char)args[a++]; }
                     else if (fmt[i] == 's') { output += args[a++].ToString(); }
                     else { output += fmt[i]; }
                 }

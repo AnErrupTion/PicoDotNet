@@ -10,8 +10,8 @@ public static class Config
     public static Color BorderColor = Color.OrangeRed;
     public static Color BackgroundColor = Color.Black;
 
-    public static uint TaskbarHeight = 25;
-    public static Alignment TaskbarAlignment = Alignment.Top;
+    public static readonly uint TaskbarHeight = 25;
+    public static readonly Alignment TaskbarAlignment = Alignment.Top;
 
-    public static uint TitlebarHeight = 20;
+    public static readonly uint TitlebarHeight = 20;
 }

@@ -50,7 +50,7 @@ public static class CommandHandlers
         if (args.Count < 2) { Debug.Error("Expected location/command of %s executable", type); return; }
 
         var cmd = CommandParser.FromName(args[0].ToUpper());
-        if (args[1] == "!") { Debug.Log("Set executable - Type:%s Value:(disabled)\n", type.ToString().PadRight(10, ' ')); }
+        if (args[1] == "!") { Debug.Log("Set executable - Type:%s Value:(disabled)\n", type.PadRight(10, ' ')); }
         else
         {
             var file = input[(cmd.Name.Length + 1)..];
@@ -67,7 +67,7 @@ public static class CommandHandlers
                 case "ramfsmgr":  { Global.RAMFSMgr   = file; break; }
             }
 
-            Debug.Log("Set executable - Type:%s Value:%s\n", type.ToString().PadRight(10, ' '), file);
+            Debug.Log("Set executable - Type:%s Value:%s\n", type.PadRight(10, ' '), file);
         }
     }
 
@@ -80,7 +80,7 @@ public static class CommandHandlers
 
     private static string GetFileName(string path, bool ext = false)
     {
-        return (ext ? Path.GetFileName(path) : Path.GetFileNameWithoutExtension(path));
+        return ext ? Path.GetFileName(path) : Path.GetFileNameWithoutExtension(path);
     }
 
     private static Process StartProcess(string name, string args)
@@ -101,7 +101,7 @@ public static class CommandHandlers
 
         if (!File.Exists(f_in)) { Debug.Error("Unable to locate file '%s'", f_in); return; }
 
-        var proc_args = "";
+        string proc_args;
         if (exec_name == Global.Compiler) { proc_args = " -o " + f_out + " -c " + f_in + " " + comp_args; }
         else if (exec_name == Global.Assembler) { proc_args = comp_args + " " + f_in + " -o " + f_out; }
         else { proc_args = " -o " + f_out + " " + f_in + " " + comp_args; }
@@ -126,14 +126,14 @@ public static class CommandHandlers
     public static void SET_OBJDUMP(string input, List<string> args)
     { 
         SetExecutable(input, args, "objdump"); 
-        Global.IsObjectDump = (args[1] != "!");
+        Global.IsObjectDump = args[1] != "!";
         if (!Global.IsObjectDump) { Global.ObjectDump = ""; }
     }
 
     public static void SET_GRUB(string input, List<string> args) 
     { 
         SetExecutable(input, args, "grub"); 
-        Global.IsGrub = (args[1] != "!");
+        Global.IsGrub = args[1] != "!";
         if (!Global.IsGrub) { Global.Grub = ""; }
         if (args[1] != "!") { CommandParser.Execute("SET_LIMINE !"); }
     }
@@ -141,7 +141,7 @@ public static class CommandHandlers
     public static void SET_LIMINE(string input, List<string> args) 
     { 
         SetExecutable(input, args, "limine"); 
-        Global.IsLimine = (args[1] != "!");
+        Global.IsLimine = args[1] != "!";
         if (!Global.IsLimine) { Global.Limine = ""; }
         if (args[1] != "!") { CommandParser.Execute("SET_GRUB !"); }
     }
@@ -276,7 +276,7 @@ public static class CommandHandlers
             var in_files = new List<FileStream>();
             for (var i = 3; i < args.Count; i++) { in_files.Add(File.OpenRead(Global.Path + args[i])); }
 
-            var iso = new CDBuilder()
+            var iso = new CDBuilder
             {
                 UseJoliet = true,
                 VolumeIdentifier = "OSMake",

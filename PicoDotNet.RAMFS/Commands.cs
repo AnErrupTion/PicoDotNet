@@ -51,7 +51,7 @@ public static class CommandHandlers
         var fname = input[5..];
         if (!File.Exists(fname)) { Debug.Error("Unable to locate image file at '%s'", fname); }
         Program.RAMFS = new RAMFileSystem(File.ReadAllBytes(fname));
-        Debug.Log("Saved image file to '%s'\n", fname);
+        Debug.Log("Loaded image file from '%s'\n", fname);
     }
 
     public static void ADD(string input, List<string> args)
@@ -63,7 +63,7 @@ public static class CommandHandlers
 
         if (!File.Exists(args[3])) { Debug.Error("Unable to locate source file '%s'", args[3]); }
         var data = File.ReadAllBytes(args[3]);
-        Program.RAMFS.AddFile(args[2], data, (args[1] == "1"));
+        Program.RAMFS.AddFile(args[2], data, args[1] == "1");
     }
 
     public static void ADDN(string input, List<string> args)

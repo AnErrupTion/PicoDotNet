@@ -20,11 +20,11 @@ public struct RAMFile
 
     public RAMFile(string name, bool hidden, uint offset, uint size)
     {
-        this.Name   = new char[MaxNameLength];
-        this.Hidden = hidden;
-        this.Offset = offset;
-        this.Size   = size;
-        this.SetName(name);
+        Name   = new char[MaxNameLength];
+        Hidden = hidden;
+        Offset = offset;
+        Size   = size;
+        SetName(name);
     }
 
     public void Read(byte[] data, int offset)
@@ -40,7 +40,7 @@ public struct RAMFile
     {
         var data = new byte[EntrySz];
         var writer = new BinaryWriter(new MemoryStream(data), Encoding.ASCII);
-        writer.Write(Name, 0, RAMFile.MaxNameLength);
+        writer.Write(Name, 0, MaxNameLength);
         writer.Write(Hidden);
         writer.Write(Offset);
         writer.Write(Size);
@@ -75,13 +75,13 @@ public struct RAMFSHeader
 
     public RAMFSHeader(uint taddr, uint tsz, uint daddr, uint dsz, uint dp, uint c, uint max)
     {
-        this.TableOffset    = taddr;
-        this.TableSize      = tsz;
-        this.DataOffset     = daddr;
-        this.DataSize       = dsz;
-        this.DataPosition   = dp;
-        this.Count          = c;
-        this.CountMax       = max;
+        TableOffset    = taddr;
+        TableSize      = tsz;
+        DataOffset     = daddr;
+        DataSize       = dsz;
+        DataPosition   = dp;
+        Count          = c;
+        CountMax       = max;
     }
 
     public void Read(byte[] data, int offset)
@@ -113,13 +113,13 @@ public struct RAMFSHeader
 
 public class RAMFileSystem
 {
-    public byte[]      Data;
-    public RAMFSHeader Header;
+    public readonly byte[] Data;
+    public RAMFSHeader     Header;
 
     public RAMFileSystem()
     {
-        this.Data = new byte[1];
-        this.Header = new RAMFSHeader();
+        Data = new byte[1];
+        Header = new RAMFSHeader();
     }
 
     public RAMFileSystem(byte[] data)
@@ -133,8 +133,8 @@ public class RAMFileSystem
 
     public RAMFileSystem(uint max_files, uint sz)
     {
-        Data = new byte[(max_files * RAMFile.EntrySz) + sz];
-        Header = new RAMFSHeader(28, (max_files * RAMFile.EntrySz), 28 + (max_files * RAMFile.EntrySz), sz, 0, 0, max_files);
+        Data = new byte[max_files * RAMFile.EntrySz + sz];
+        Header = new RAMFSHeader(28, max_files * RAMFile.EntrySz, 28 + max_files * RAMFile.EntrySz, sz, 0, 0, max_files);
         Array.Copy(Header.Write(), 0, Data, 0, 28);
         Debug.Log("Created RAMFS - Max:%u Size:%u bytes\n", max_files, sz);
     }
@@ -147,11 +147,11 @@ public class RAMFileSystem
         if (i == -1) { Debug.Error("Maximum amount of files reached"); return new RAMFile(); }
 
         var file = new RAMFile(name, hidden, Header.DataPosition, (uint)data.Length);
-        Array.Copy(file.Write(), 0, Data, (Header.TableOffset + (i * RAMFile.EntrySz)), RAMFile.EntrySz);
+        Array.Copy(file.Write(), 0, Data, Header.TableOffset + i * RAMFile.EntrySz, RAMFile.EntrySz);
         Array.Copy(data, 0, Data, Header.DataOffset + Header.DataPosition, data.Length);
         Header.DataPosition += (uint)data.Length;
         Array.Copy(Header.Write(), 0, Data, 0, 28);
-        Debug.Log("Added file - Name:%s Hidden:%d Size:%d bytes\n", name, (hidden ? 1 : 0), data.Length);
+        Debug.Log("Added file - Name:%s Hidden:%d Size:%d bytes\n", name, hidden ? 1 : 0, data.Length);
         return GetFile(i);
     }
 
@@ -159,7 +159,7 @@ public class RAMFileSystem
     {
         if (rd_hdr) { Header.Read(Data, 0); }
         var file = new RAMFile();
-        file.Read(Data, (int)(Header.TableOffset + (index * RAMFile.EntrySz)));
+        file.Read(Data, (int)(Header.TableOffset + index * RAMFile.EntrySz));
         return file;
     }
 

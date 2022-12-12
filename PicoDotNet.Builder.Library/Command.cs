@@ -7,7 +7,7 @@ public class Command
 
     public Command(string name, Action<string, List<string>> handler)
     {
-        this.Name    = name;
-        this.Handler = handler;
+        Name    = name;
+        Handler = handler;
     }
 }
