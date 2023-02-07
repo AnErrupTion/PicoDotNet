@@ -33,7 +33,7 @@ public static class Canvas
             return;
         }
 
-        BGA.Initialize((ushort)width, (ushort)height);
+        GOP.Initialize((ushort)width, (ushort)height);
 
         Width = width;
         Height = height;
@@ -59,7 +59,7 @@ public static class Canvas
     /// <param name="color">The color.</param>
     public static void Clear(Color color)
     {
-        BGA.Clear((uint)color.ToArgb());
+        GOP.Clear((uint)color.ToArgb());
     }
 
     /// <summary>
@@ -70,7 +70,7 @@ public static class Canvas
     /// <param name="color">The color.</param>
     public static void DrawPoint(uint x, uint y, Color color)
     {
-        BGA.SetPixel(x, y, (uint)color.ToArgb());
+        GOP.SetPixel(x, y, (uint)color.ToArgb());
     }
 
     /// <summary>
@@ -81,7 +81,7 @@ public static class Canvas
     /// <param name="text"></param>
     public static void DrawText(uint x, uint y, string text, Color color)
     {
-        // TODO: Draw text on BGA
+        // TODO: Draw text on GOP
     }
 
     /// <summary>
@@ -97,7 +97,7 @@ public static class Canvas
         var col = (uint)color.ToArgb();
         for (var xx = x; xx < width; xx++)
             for (var yy = y; yy < height; yy++)
-                BGA.SetPixel(xx, yy, col);
+                GOP.SetPixel(xx, yy, col);
     }
 
     /// <summary>
@@ -110,7 +110,7 @@ public static class Canvas
     /// <param name="color">The color.</param>
     public static void DrawRectangle(uint x, uint y, uint width, uint height, Color color)
     {
-        // TODO: Draw rectangle on BGA
+        // TODO: Draw rectangle on GOP
     }
 
     /// <summary>
@@ -120,7 +120,7 @@ public static class Canvas
     /// <returns>The real screen width of the chosen string.</returns>
     public static uint CalculateWidth(string text)
     {
-        // TODO: Calculate text width on BGA
+        // TODO: Calculate text width on GOP
         return 0;
     }
 
@@ -131,12 +131,12 @@ public static class Canvas
     /// <returns>The real screen height of the chosen string.</returns>
     public static uint CalculateHeight(string text)
     {
-        // TODO: Calculate text height on BGA
+        // TODO: Calculate text height on GOP
         return 0;
     }
 
     /// <summary>
     /// Renders the pixels to the screen.
     /// </summary>
-    public static void Update() => BGA.Update();
+    public static void Update() => GOP.Update();
 }

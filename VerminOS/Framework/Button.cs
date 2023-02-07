@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using PicoDotNet;
 using PicoDotNet.SDL;
 
 namespace VerminOS.Framework;
@@ -34,7 +33,7 @@ public class Button : Component
                 _clicked = 1;
                 return;
             }
-            
+
             Color = Color.DimGray;
             Action?.Invoke();
         }

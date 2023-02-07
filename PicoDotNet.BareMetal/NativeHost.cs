@@ -10,6 +10,12 @@ namespace PicoDotNet.BareMetal;
 internal static unsafe class NativeHost
 {
     [MethodImpl(MethodImplOptions.InternalCall)]
+    public static extern void GOP_SetMode(uint width, uint height);
+
+    [MethodImpl(MethodImplOptions.InternalCall)]
+    public static extern uint GOP_GetFramebuffer();
+
+    [MethodImpl(MethodImplOptions.InternalCall)]
     public static extern void* Memory_Allocate(ulong size);
 
     [MethodImpl(MethodImplOptions.InternalCall)]

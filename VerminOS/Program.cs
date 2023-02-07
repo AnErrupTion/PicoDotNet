@@ -1,5 +1,4 @@
-﻿using PicoDotNet;
-using PicoDotNet.SDL;
+﻿using PicoDotNet.SDL;
 using VerminOS.Commands;
 using VerminOS.Gui;
 using Console = PicoDotNet.SDL.Console;

@@ -1,5 +1,4 @@
-﻿using PicoDotNet;
-using PicoDotNet.SDL;
+﻿using PicoDotNet.SDL;
 using VerminOS.Apps;
 using VerminOS.Framework;
 
