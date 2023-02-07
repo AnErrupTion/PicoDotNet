@@ -4,7 +4,7 @@ using PicoDotNet.SDL.Windowing;
 using static SDL2.Bindings.SDL_ttf;
 using static SDL2.Bindings.SDL;
 
-namespace PicoDotNet;
+namespace PicoDotNet.SDL;
 
 // TODO: '\n', '\r', '\t', etc... characters on SDL 2
 public static class Console

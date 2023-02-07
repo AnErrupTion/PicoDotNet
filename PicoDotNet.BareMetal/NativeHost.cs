@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace PicoDotNet;
+namespace PicoDotNet.BareMetal;
 
 /// <summary>
 /// The native functions plugged by the runtime.

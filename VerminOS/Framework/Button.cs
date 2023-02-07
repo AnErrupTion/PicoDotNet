@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using PicoDotNet;
+using PicoDotNet.SDL;
 
 namespace VerminOS.Framework;
 

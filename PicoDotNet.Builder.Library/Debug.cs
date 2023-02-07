@@ -15,14 +15,33 @@ public static class Debug
                 if (a < 0 || a >= args.Length) { output += fmt[i]; }
                 else
                 {
-                    if (fmt[i] == 'd') { output += ((int)args[a++]).ToString(); }
-                    else if (fmt[i] == 'u') { output += ((uint)args[a++]).ToString(); }
-                    else if (fmt[i] == 'l') { output += ((ulong)args[a++]).ToString(); }
-                    else if (fmt[i] == 'f') { output += ((float)args[a++]).ToString(); }
-                    else if (fmt[i] == 'p') { output += ((uint)args[a++]).ToString("X8"); }
-                    else if (fmt[i] == 'c') { output += (char)args[a++]; }
-                    else if (fmt[i] == 's') { output += args[a++].ToString(); }
-                    else { output += fmt[i]; }
+                    switch (fmt[i])
+                    {
+                        case 'd':
+                            output += ((int)args[a++]).ToString();
+                            break;
+                        case 'u':
+                            output += ((uint)args[a++]).ToString();
+                            break;
+                        case 'l':
+                            output += ((ulong)args[a++]).ToString();
+                            break;
+                        case 'f':
+                            output += ((float)args[a++]).ToString();
+                            break;
+                        case 'p':
+                            output += ((uint)args[a++]).ToString("X8");
+                            break;
+                        case 'c':
+                            output += (char)args[a++];
+                            break;
+                        case 's':
+                            output += args[a++].ToString();
+                            break;
+                        default:
+                            output += fmt[i];
+                            break;
+                    }
                 }
             }
             else { output += fmt[i]; }

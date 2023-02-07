@@ -1,4 +1,4 @@
-namespace PicoDotNet;
+namespace PicoDotNet.BareMetal;
 
 [Flags]
 public enum MouseState

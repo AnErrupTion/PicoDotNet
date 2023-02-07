@@ -1,4 +1,4 @@
-namespace PicoDotNet;
+namespace PicoDotNet.SDL;
 
 [Flags]
 public enum MouseState

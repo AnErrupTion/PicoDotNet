@@ -4,7 +4,7 @@ namespace PicoDotNet.Builder.Library;
 public static class CommandParser
 {
     public static string Path { get { return Directory.GetCurrentDirectory(); } } 
-    public static List<Command> Commands { get; private set; } = new List<Command>();
+    public static List<Command> Commands { get; } = new();
 
     public static void DefaultCommandHandler(string input, List<string> args) { Debug.Error("Invalid input '%s'", input); }
 

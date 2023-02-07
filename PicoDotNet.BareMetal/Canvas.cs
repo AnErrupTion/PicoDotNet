@@ -1,7 +1,7 @@
 using System.Drawing;
-using PicoDotNet.Drivers;
+using PicoDotNet.BareMetal.Drivers;
 
-namespace PicoDotNet;
+namespace PicoDotNet.BareMetal;
 
 public static class Canvas
 {

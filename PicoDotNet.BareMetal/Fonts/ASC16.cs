@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace PicoDotNet.Fonts;
+namespace PicoDotNet.BareMetal.Fonts;
 
 /// <summary>
 /// A hard-coded, 8x16 ASCII font.

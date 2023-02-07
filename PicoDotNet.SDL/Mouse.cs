@@ -1,7 +1,7 @@
 using System.Drawing;
 using static SDL2.Bindings.SDL;
 
-namespace PicoDotNet;
+namespace PicoDotNet.SDL;
 
 public static class Mouse
 {

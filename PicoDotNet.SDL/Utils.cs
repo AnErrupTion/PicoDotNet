@@ -2,7 +2,7 @@ using PicoDotNet.SDL.Windowing;
 using static SDL2.Bindings.SDL_ttf;
 using static SDL2.Bindings.SDL;
 
-namespace PicoDotNet;
+namespace PicoDotNet.SDL;
 
 public static class Utils
 {

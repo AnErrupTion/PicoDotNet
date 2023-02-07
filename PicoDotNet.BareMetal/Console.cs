@@ -1,9 +1,9 @@
 using System.Drawing;
 using System.Text;
-using PicoDotNet.Fonts;
-using PicoDotNet.Helpers;
+using PicoDotNet.BareMetal.Fonts;
+using PicoDotNet.BareMetal.Helpers;
 
-namespace PicoDotNet;
+namespace PicoDotNet.BareMetal;
 
 public static class Console
 {

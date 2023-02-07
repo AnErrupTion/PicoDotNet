@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace PicoDotNet.Helpers;
+namespace PicoDotNet.BareMetal.Helpers;
 
 internal static class ColorHelpers
 {

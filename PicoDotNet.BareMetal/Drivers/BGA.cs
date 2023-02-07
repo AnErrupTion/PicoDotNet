@@ -1,4 +1,4 @@
-﻿namespace PicoDotNet.Drivers;
+﻿namespace PicoDotNet.BareMetal.Drivers;
 
 public static unsafe class BGA
 {

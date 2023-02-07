@@ -5,41 +5,41 @@ using DiscUtils.Iso9660;
 
 namespace PicoDotNet.OSMake;
 
-public class CommandDeclarations
+public static class CommandDeclarations
 {
-    public static Command INFO   { get; private set; } = new Command("INFO",  CommandHandlers.INFO);
+    public static Command INFO   { get; } = new("INFO",  CommandHandlers.INFO);
     
-    public static Command SET_ASSEMBLER { get; private set; } = new Command("SET_ASSEMBLER", CommandHandlers.SET_ASSEMBLER);
-    public static Command SET_COMPILER  { get; private set; } = new Command("SET_COMPILER",  CommandHandlers.SET_COMPILER);
-    public static Command SET_LINKER    { get; private set; } = new Command("SET_LINKER",    CommandHandlers.SET_LINKER);
-    public static Command SET_OBJDUMP   { get; private set; } = new Command("SET_OBJDUMP",   CommandHandlers.SET_OBJDUMP);
-    public static Command SET_GRUB      { get; private set; } = new Command("SET_GRUB",      CommandHandlers.SET_GRUB);
-    public static Command SET_LIMINE    { get; private set; } = new Command("SET_LIMINE",    CommandHandlers.SET_LIMINE);
-    public static Command SET_EMULATOR  { get; private set; } = new Command("SET_EMULATOR",  CommandHandlers.SET_EMULATOR);
-    public static Command SET_RAMFSMGR  { get; private set; } = new Command("SET_RAMFSMGR",  CommandHandlers.SET_RAMFSMGR);
+    public static Command SET_ASSEMBLER { get; } = new("SET_ASSEMBLER", CommandHandlers.SET_ASSEMBLER);
+    public static Command SET_COMPILER  { get; } = new("SET_COMPILER",  CommandHandlers.SET_COMPILER);
+    public static Command SET_LINKER    { get; } = new("SET_LINKER",    CommandHandlers.SET_LINKER);
+    public static Command SET_OBJDUMP   { get; } = new("SET_OBJDUMP",   CommandHandlers.SET_OBJDUMP);
+    public static Command SET_GRUB      { get; } = new("SET_GRUB",      CommandHandlers.SET_GRUB);
+    public static Command SET_LIMINE    { get; } = new("SET_LIMINE",    CommandHandlers.SET_LIMINE);
+    public static Command SET_EMULATOR  { get; } = new("SET_EMULATOR",  CommandHandlers.SET_EMULATOR);
+    public static Command SET_RAMFSMGR  { get; } = new("SET_RAMFSMGR",  CommandHandlers.SET_RAMFSMGR);
 
-    public static Command SET_DIR       { get; private set; } = new Command("SET_DIR", CommandHandlers.SET_DIR);
+    public static Command SET_DIR       { get; } = new("SET_DIR", CommandHandlers.SET_DIR);
 
-    public static Command MK_DIR { get; private set; } = new Command("MK_DIR", CommandHandlers.MK_DIR);
-    public static Command RMMK_DIR { get; private set; } = new Command("RMMK_DIR", CommandHandlers.RMMK_DIR);
+    public static Command MK_DIR { get; } = new("MK_DIR", CommandHandlers.MK_DIR);
+    public static Command RMMK_DIR { get; } = new("RMMK_DIR", CommandHandlers.RMMK_DIR);
 
-    public static Command RM_DIR { get; private set; } = new Command("RM_DIR", CommandHandlers.RM_DIR);
+    public static Command RM_DIR { get; } = new("RM_DIR", CommandHandlers.RM_DIR);
 
-    public static Command COMPILE { get; private set; } = new Command("COMPILE", CommandHandlers.COMPILE);
-    public static Command COMPILE_PATH { get; private set; } = new Command("COMPILE_PATH", CommandHandlers.COMPILE_PATH);
+    public static Command COMPILE { get; } = new("COMPILE", CommandHandlers.COMPILE);
+    public static Command COMPILE_PATH { get; } = new("COMPILE_PATH", CommandHandlers.COMPILE_PATH);
 
-    public static Command ASSEMBLE { get; private set; } = new Command("ASSEMBLE", CommandHandlers.ASSEMBLE);
-    public static Command ASSEMBLE_PATH { get; private set; } = new Command("ASSEMBLE_PATH", CommandHandlers.ASSEMBLE_PATH);
+    public static Command ASSEMBLE { get; } = new("ASSEMBLE", CommandHandlers.ASSEMBLE);
+    public static Command ASSEMBLE_PATH { get; } = new("ASSEMBLE_PATH", CommandHandlers.ASSEMBLE_PATH);
 
-    public static Command LINK { get; private set; } = new Command("LINK", CommandHandlers.LINK);
-    public static Command LINK_PATH { get; private set; } = new Command("LINK_PATH", CommandHandlers.LINK_PATH);
+    public static Command LINK { get; } = new("LINK", CommandHandlers.LINK);
+    public static Command LINK_PATH { get; } = new("LINK_PATH", CommandHandlers.LINK_PATH);
 
-    public static Command MK_ISO { get; private set; } = new Command("MK_ISO", CommandHandlers.MK_ISO);
-    public static Command MK_RAMDISK { get; private set; } = new Command("MK_RAMDISK", CommandHandlers.MK_RAMDISK);
+    public static Command MK_ISO { get; } = new("MK_ISO", CommandHandlers.MK_ISO);
+    public static Command MK_RAMDISK { get; } = new("MK_RAMDISK", CommandHandlers.MK_RAMDISK);
 
-    public static Command LIMINE { get; private set; } = new Command("LIMINE", CommandHandlers.LIMINE);
+    public static Command LIMINE { get; } = new("LIMINE", CommandHandlers.LIMINE);
 
-    public static Command RUN { get; private set; } = new Command("RUN", CommandHandlers.RUN);
+    public static Command RUN { get; } = new("RUN", CommandHandlers.RUN);
 }
 
 
@@ -95,8 +95,14 @@ public static class CommandHandlers
 
     private static void RunExecutable(string input, List<string> args, string exec_name, string msg_name)
     {
-        if (args.Count == 1) { Debug.Error("Expected output file"); return; }
-        if (args.Count == 2) { Debug.Error("Expected input file"); return; }
+        switch (args.Count)
+        {
+            case 1:
+                Debug.Error("Expected output file"); return;
+            case 2:
+                Debug.Error("Expected input file"); return;
+        }
+
         string f_out = Global.Path + args[1], f_in = Global.Path + args[2], comp_args = CommandParser.ReformInput(args.ToArray(), 3);
 
         if (!File.Exists(f_in)) { Debug.Error("Unable to locate file '%s'", f_in); return; }
@@ -193,15 +199,21 @@ public static class CommandHandlers
 
     public static void COMPILE_PATH(string input, List<string> args)
     {
-        if (args.Count == 1) { Debug.Error("Expected output path"); return; }
-        if (args.Count == 2) { Debug.Error("Expected input path"); return; }
+        switch (args.Count)
+        {
+            case 1:
+                Debug.Error("Expected output path"); return;
+            case 2:
+                Debug.Error("Expected input path"); return;
+        }
+
         string d_out = args[1], d_in = args[2], comp_args = CommandParser.ReformInput(args.ToArray(), 3);
         if (!d_out.EndsWith("/")) { d_out += "/"; }
         if (!d_in.EndsWith("/"))  { d_in += "/"; }
 
         foreach (var file in Directory.GetFiles(Global.Path + d_in, "*.c", SearchOption.AllDirectories))
         {
-            var name = GetFileName(file, false);
+            var name = GetFileName(file);
             CommandParser.Execute("COMPILE " + d_out + name + ".o " + file[Global.Path.Length..] + " " + comp_args);
         }
     }
@@ -213,30 +225,41 @@ public static class CommandHandlers
 
     public static void ASSEMBLE_PATH(string input, List<string> args)
     {
-        if (args.Count == 1) { Debug.Error("Expected output path"); return; }
-        if (args.Count == 2) { Debug.Error("Expected input path"); return; }
+        switch (args.Count)
+        {
+            case 1:
+                Debug.Error("Expected output path"); return;
+            case 2:
+                Debug.Error("Expected input path"); return;
+        }
+
         string d_out = args[1], d_in = args[2], comp_args = CommandParser.ReformInput(args.ToArray(), 3);
         if (!d_out.EndsWith("/")) { d_out += "/"; }
         if (!d_in.EndsWith("/"))  { d_in += "/"; }
 
         foreach (var file in Directory.GetFiles(Global.Path + d_in, "*.asm", SearchOption.AllDirectories))
         {
-            var name = GetFileName(file, false);
+            var name = GetFileName(file);
             CommandParser.Execute("ASSEMBLE " + d_out + name + ".o " + file[Global.Path.Length..] + " " + comp_args);
         }
     }
 
     public static void LINK(string input, List<string> args)
     {
-        if (args.Count == 1) { Debug.Error("Expected input file"); return; }
-        if (args.Count == 2) { Debug.Error("Expected output file"); return; }
+        switch (args.Count)
+        {
+            case 1:
+                Debug.Error("Expected input file"); return;
+            case 2:
+                Debug.Error("Expected output file"); return;
+        }
 
         var f_ins = args[2].Split(',');
         string f_out = args[1], f_in = CommandParser.ReformInput(f_ins), comp_args = CommandParser.ReformInput(args.ToArray(), 3);
 
-        for (var i = 0; i < f_ins.Length; i++)
+        foreach (var t in f_ins)
         {
-            if (!File.Exists(f_ins[i])) { Debug.Error("Unable to locate file '%s'", f_ins[i]); return; }
+            if (!File.Exists(t)) { Debug.Error("Unable to locate file '%s'", t); return; }
         }
 
         var proc_args = comp_args + " -o " + f_out + " " + f_in;
@@ -250,14 +273,19 @@ public static class CommandHandlers
 
     public static void LINK_PATH(string input, List<string> args)
     {
-        if (args.Count == 1) { Debug.Error("Expected input file"); return; }
-        if (args.Count == 2) { Debug.Error("Expected output file"); return; }
+        switch (args.Count)
+        {
+            case 1:
+                Debug.Error("Expected input file"); return;
+            case 2:
+                Debug.Error("Expected output file"); return;
+        }
+
         string f_out = Global.Path + args[1], d_in = args[2], comp_args = CommandParser.ReformInput(args.ToArray(), 3);
 
         if (!Directory.Exists(d_in)) { Debug.Error("Unable to locate directory '%s'", d_in); return; }
 
-        var f_ins = string.Empty;
-        foreach (var f in Directory.GetFiles(Global.Path + d_in)) { f_ins += StringUtil.FormatPath(f, false) + ","; }
+        var f_ins = Directory.GetFiles(Global.Path + d_in).Aggregate(string.Empty, (current, f) => current + (StringUtil.FormatPath(f, false) + ","));
         if (f_ins.EndsWith(",")) { f_ins = f_ins.Remove(f_ins.Length - 1, 1 ); }
 
         CommandParser.Execute("LINK " + f_out + " " + f_ins + " " + comp_args);
@@ -280,7 +308,7 @@ public static class CommandHandlers
             {
                 UseJoliet = true,
                 VolumeIdentifier = "OSMake",
-                UpdateIsolinuxBootTable = true,
+                UpdateIsolinuxBootTable = true
             };
 
             iso.AddFile("limine.sys", f_sys);

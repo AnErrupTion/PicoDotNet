@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace PicoDotNet;
+namespace PicoDotNet.BareMetal;
 
 public static class Mouse
 {
