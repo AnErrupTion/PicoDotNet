@@ -6,12 +6,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicoDotNet.SDL", "PicoDotNe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicoDotNet.BareMetal", "PicoDotNet.BareMetal\PicoDotNet.BareMetal.csproj", "{1C29FD2C-2D68-42C3-8ADA-7D2E9861B51E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicoDotNet.OSMake", "PicoDotNet.OSMake\PicoDotNet.OSMake.csproj", "{7466C5D2-1DC6-44E7-A9F0-1BC72689429A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicoDotNet.RAMFS", "PicoDotNet.RAMFS\PicoDotNet.RAMFS.csproj", "{F096EAE0-8F07-4B8A-A549-FAE9E3273EE3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicoDotNet.Builder.Library", "PicoDotNet.Builder.Library\PicoDotNet.Builder.Library.csproj", "{B5B128E8-E032-450D-BE6F-BF6ECFA1284B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,17 +24,5 @@ Global
 		{1C29FD2C-2D68-42C3-8ADA-7D2E9861B51E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C29FD2C-2D68-42C3-8ADA-7D2E9861B51E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C29FD2C-2D68-42C3-8ADA-7D2E9861B51E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7466C5D2-1DC6-44E7-A9F0-1BC72689429A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7466C5D2-1DC6-44E7-A9F0-1BC72689429A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7466C5D2-1DC6-44E7-A9F0-1BC72689429A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7466C5D2-1DC6-44E7-A9F0-1BC72689429A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F096EAE0-8F07-4B8A-A549-FAE9E3273EE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F096EAE0-8F07-4B8A-A549-FAE9E3273EE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F096EAE0-8F07-4B8A-A549-FAE9E3273EE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F096EAE0-8F07-4B8A-A549-FAE9E3273EE3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B5B128E8-E032-450D-BE6F-BF6ECFA1284B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5B128E8-E032-450D-BE6F-BF6ECFA1284B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5B128E8-E032-450D-BE6F-BF6ECFA1284B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5B128E8-E032-450D-BE6F-BF6ECFA1284B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
